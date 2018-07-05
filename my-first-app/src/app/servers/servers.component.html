@@ -1,0 +1,40 @@
+<label>Server Name</label>
+<input type="text" class="form-control" [(ngModel)]="serverName" />
+<!-- TWO WAY DATA BINDING input with [(ngModel)]-->
+<!-- <input
+  type="text"
+  class="form-control"
+  (input)="onUpdateServerName($event)" /> -->
+<!-- <p>{{ serverName }}</p> -->
+<!-- EVENT BINDING, does not use two way binding, $event reserve variable that gives access to event data -->
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add Server</button>
+<!-- (click) EVENT BINDING with () -->
+<!-- <p [innerText]="allowNewServer"></p> -->
+<!-- [disabled]="expression" PROPERTY BINDING with [], must not add {{}} and evaluates true/false -->
+<!-- <p>{{ serverCreationStatus }}</p> -->
+<p *ngIf="serverCreated; else noServer">Server was created, server name is {{ serverName }}</p>
+<ng-template #noServer>
+  <p>No server was created!</p>
+</ng-template>
+<!-- <p *ngIf="!serverCreated">No server was created!</p> -->
+<!-- ngIf structural directive, * for directives -->
+
+<app-server *ngFor="let server of servers"></app-server>
+
+<hr />
+<p>Assignment #2</p>
+<ol>
+  <li>Add an Input field which updates a property ('username') via Two-Way-Binding</li>
+  <li>Output the username property via String Interpolation (in a paragraph below the input)</li>
+  <li>Add a button which may only be clicked if the username is NOT an empty string</li>
+  <li>Upon clicking the button, the username should be reset to an empty string</li>
+</ol>
+<hr />
+<label>Username</label>
+<input type="text" class="form-control" [(ngModel)]="username" />
+<p>{{ username }}</p>
+<!-- <button
+  class="btn btn-primary"
+  [disabled]="!username"
+  (click)="onClear()">Clear</button> -->
+<button class="btn btn-primary" [disabled]="username === ''" (click)="username = ''">Clear</button>
