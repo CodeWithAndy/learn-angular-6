@@ -20,7 +20,7 @@
       <button class="btn btn-info" (click)="onDisplayDetails()">Display Details</button>
       <br /><br />
       <p *ngIf="showSecret">Secret Password = tuna</p>
-      <div *ngFor="let log of logs" [ngStyle]="{'background-color': log >= 5 ? 'blue' : 'transparent'}" [ngClass]="{'white-text': log >= 5}">{{ log }}</div>
+      <div *ngFor="let log of logs; let i = index" [ngStyle]="{'background-color': i >= 4 ? 'blue' : 'transparent'}" [ngClass]="{'white-text': i >= 4}">{{ log }}</div>
     </div>
   </div>
 </div>
