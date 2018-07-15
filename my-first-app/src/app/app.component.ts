@@ -16,6 +16,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   showSecret = false;
   logs = [];
+  numbers: number[] = [];
 
   constructor() {
 
@@ -24,5 +25,10 @@ export class AppComponent {
   onDisplayDetails() {
     this.showSecret = !this.showSecret;
     this.logs.push(this.logs.length + 1);
+  }
+
+  onStartInterval(value) {
+    console.log(value.interval);
+    this.numbers.push(value.interval);
   }
 }

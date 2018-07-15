@@ -23,4 +23,26 @@
       <div *ngFor="let log of logs; let i = index" [ngStyle]="{'background-color': i >= 4 ? 'blue' : 'transparent'}" [ngClass]="{'white-text': i >= 4}">{{ log }}</div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <hr>
+      <p>Assignment #4</p>
+      <ol>
+        <li>Create three new components: GameControl, Odd and Even</li>
+        <li>The GameControl Component should have buttons to start and stop the game</li>
+        <li>When starting the game, an event (holding an incrementing number) should get emitted each second (ref = setInterval())</li>
+        <li>The event should be listenable from outside the component</li>
+        <li>When stopping the game, no more events should get emitted(clearInterval(ref))</li>
+        <li>A new Odd component should get created for every odd number emitted, the same should happen for the Even Component (on even numbers)</li>
+        <li>Simply output Odd - NUMBER or Even - NUMBER in the two components</li>
+        <li>Style the elemente (e.g. paragraph) holding your putput text differently in both components</li>
+      </ol>
+      <hr>
+      <app-game-control (startInterval)="onStartInterval($event)"></app-game-control>
+      <div *ngFor="let number of numbers; even as isEven; odd as isOdd">
+        <app-even *ngIf="isEven" [number]="number"></app-even>
+        <app-odd *ngIf="isOdd" [number]="number"></app-odd>
+      </div>
+    </div>
+  </div>
 </div>
