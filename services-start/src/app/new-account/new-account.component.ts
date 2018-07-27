@@ -11,7 +11,7 @@ import { AccountService } from '../account.service';
 export class NewAccountComponent {
   constructor(private loggingService: LoggingService, private accountService: AccountService) {
     this.accountService.statusUpdated.subscribe(
-      //function(status: string){ alert('New Status: ' + status)}
+      // function(status: string){ alert('New Status: ' + status)}
       (status: string) => alert('New Status: ' + status)
     );
   } // DEPENDENCY INJECTION

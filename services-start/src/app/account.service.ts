@@ -1,7 +1,7 @@
 import { LoggingService } from "./logging.service";
 import { Injectable, EventEmitter } from "../../node_modules/@angular/core";
 
-// @Injectable() decorator allows this service to accept dependencies
+// @Injectable() decorator allows this service to accept dependencies, to receiving service
 @Injectable()
 export class AccountService {
     accounts = [
