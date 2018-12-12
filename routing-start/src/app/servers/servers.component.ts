@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServersService } from './servers.service';
-import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-servers',
@@ -17,6 +17,8 @@ export class ServersComponent implements OnInit {
   }
 
   onReload() {
-   // this.router.navigate(['servers'], { relativeTo: this.route });
+    // navigate relative to this current active route else defaults relative to root = servers/servers
+    // this.router.navigate(['servers'], {relativeTo: this.route});
   }
+
 }

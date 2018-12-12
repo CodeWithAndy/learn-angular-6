@@ -2,17 +2,16 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <ul class="nav nav-tabs">
-        <!-- Absolute path with / will always add to root -->
         <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a></li>
-        <!-- Relative path without / or ./ will append -->
-        <li role="presentation" routerLinkActive="active"><a routerLink="./servers">Servers</a></li>
-        <li role="presentation" routerLinkActive="active"><a [routerLink]="['/users']">Users</a></li>
+        <!-- routerLinkActive adds a class if active, routerLinkActiveOption only adds active class if exact and not contains part of path-->
+        <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="servers">Servers</a></li>
+        <!-- ./ or no / is same as relative, / is absolute -->
+        <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['users']">Users</a></li>
       </ul>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <!-- MAIN ROUTER CONTENT -->
       <router-outlet></router-outlet>
     </div>
   </div>

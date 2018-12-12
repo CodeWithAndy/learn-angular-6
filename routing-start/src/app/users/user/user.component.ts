@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '../../../../node_modules/@angular/router';
-import { Subscription } from '../../../../node_modules/rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-user',
@@ -18,8 +18,8 @@ export class UserComponent implements OnInit, OnDestroy {
       id: this.route.snapshot.params['id'],
       name: this.route.snapshot.params['name']
     };
-    // will update params when route params change (observable fires - rxjs - asynchronous)
-    this.route.params.subscribe(
+    // snapshot example vs observable
+    this.paramsSubscription = this.route.params.subscribe(
       (params: Params) => {
         this.user.id = params['id'];
         this.user.name = params['name'];
@@ -28,9 +28,8 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.paramsSubscription) {
-      this.paramsSubscription.unsubscribe();
-    }
+    this.paramsSubscription.unsubscribe();
+    // Angular does this automatically on destroy but need to unsubscribe from custom observables
   }
 
 }

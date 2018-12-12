@@ -1,17 +1,26 @@
 <div class="row">
   <div class="col-xs-12 col-sm-4">
     <div class="list-group">
-      <!-- router params, query params, fragments -->
-      <a [routerLink]="['/servers', server.id]" [queryParams]="{allowEdit: server.id === 3 ? '1' : '0'}" [fragment]="'loading'" href="#" class="list-group-item" *ngFor="let server of servers">
+      <a
+        [routerLink]="['/servers', server.id]"
+        [queryParams]="{allowEdit: server.id === 3 ? '1' : '0'}"
+        fragment="loading"
+        href="#"
+        class="list-group-item"
+        *ngFor="let server of servers">
         {{ server.name }}
       </a>
+      <!-- fragment for # in url -->
     </div>
   </div>
   <div class="col-xs-12 col-sm-4">
+    <!-- <a routerLink="../servers">Reload Page</a> -->
+    <!-- / is absolute path else relative, ./ same as relative with no / -->
+    <!-- <button class="btn btn-primary" (click)="onReload()">Reload Page</button> -->
     <router-outlet></router-outlet>
-    <!-- <button class="btn btn-primary" (click)="onReload()" style="margin-top: 15px; margin-bottom: 10px;">Reload Page</button>
-    <app-edit-server></app-edit-server>
+    <!-- <app-edit-server></app-edit-server>
     <hr> -->
     <!-- <app-server></app-server> -->
   </div>
 </div>
+
