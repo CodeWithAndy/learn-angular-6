@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../node_modules/@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,8 @@ import { Router } from '../../../node_modules/@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  status = 'Logged Out';
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -16,6 +17,15 @@ export class HomeComponent implements OnInit {
   onLoadServers(id: number) {
     // query params and fragment programmatically
     this.router.navigate(['/servers/', id, 'edit'], {queryParams: {allowEdit: '1'}, fragment: 'loading'});
+  }
 
+  onLogin() {
+    this.authService.login();
+    this.status = 'Logged In';
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.status = 'Logged Out';
   }
 }
