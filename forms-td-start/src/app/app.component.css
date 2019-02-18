@@ -1,0 +1,8 @@
+.container {
+  margin-top: 30px;
+}
+
+/* show red border only if input element with BOTH ng-invalid && ng-touched clases*/
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+  border: 1px solid darkred;
+}
