@@ -11,9 +11,33 @@ export class AppComponent {
   defaultQuestion = 'pet';
   answer = '';
   genders = ['male', 'female'];
+  user = {
+    username: '',
+    email: '',
+    secretQuestion: '',
+    answer: '',
+    gender: ''
+  };
+  submitted = false;
 
   suggestUserName() {
     const suggestedName = 'Superuser';
+    // setValue() object must match exact form object, this will set value for all controls
+    // this.form.setValue({
+    //   userData: {
+    //     username: suggestedName,
+    //     email: '',
+    //   },
+    //   secret: 'pet',
+    //   questionAnswer: '',
+    //   gender: 'male'
+    // });
+    // patch will only set value for part of the form and not override everything else
+    this.form.form.patchValue({
+      userData: {
+        username: suggestedName
+      }
+    });
   }
 
   // LOCAL REFERENCE APPROACH
@@ -23,6 +47,13 @@ export class AppComponent {
 
   // VIEWCHILD APPROACH
   onSubmit() {
-    console.log(this.form);
+    this.submitted = true;
+     this.user.username = this.form.value.userData.username;
+     this.user.email = this.form.value.userData.email;
+     this.user.secretQuestion = this.form.value.secret;
+     this.user.answer = this.form.value.questionAnswer;
+     this.user.gender = this.form.value.gender;
+
+     this.form.reset();
   }
 }
