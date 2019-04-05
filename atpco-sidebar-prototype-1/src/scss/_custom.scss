@@ -1,0 +1,43 @@
+.app-header.navbar .navbar-brand {
+    display: inline-block;
+    width: 200px;
+    height: 55px;
+    padding: .75rem 1rem;
+    margin-right: 0;
+    background-color: #20a8d8;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 70px auto;
+    border-bottom: 1px solid #1d97c2;
+    color: white;
+    font-size: 18px;
+}
+
+.app-header.navbar .navbar-toggler {
+    outline: none;
+}
+
+.sidebar .nav-link {
+    font-size: 12px;
+}
+
+.beta {
+    float: none !important;
+}
+
+.breadcrumb {
+    min-height: 45px;
+}
+
+.rule-details {
+    border-bottom: 2px solid #20a8d8;
+}
+
+.rule-details:hover>.dropdown-menu {
+    display: block;
+}
+
+.btn {
+    border-radius: .25rem;
+}

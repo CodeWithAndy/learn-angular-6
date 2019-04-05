@@ -1,0 +1,631 @@
+<header class="app-header navbar">
+  <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>&#9776;</button>
+  <a class="navbar-brand text-center" href="#">MarketView</a>
+  <button class="navbar-toggler d-md-down-none" type="button" appSidebarMinimizer>&#9776;</button>
+
+  <!-- TOP NAVIGATION | LEFT -->
+  <ul class="nav navbar-nav d-md-down-none ml-1">
+    <li class="nav-item rule-details px-3 active">
+      <a class="nav-link" [routerLink]="['/search']">Search</a>
+    </li>
+    <li class="nav-item px-3">
+      <a class="nav-link" [routerLink]="['/search']">Results</a>
+    </li>
+
+  </ul>
+  <!-- RIGHT | RIGHT-->
+  <ul class="nav navbar-nav ml-auto">
+    <!-- NOTIFICATIONS -->
+    <!-- <li class="nav-item dropdown d-md-down-none" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="false">
+        <i class="icon-bell"></i><span class="badge badge-pill badge-danger">4</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center"><strong>You have 4 notifications</strong></div>
+        <a href="#" class="dropdown-item">
+          <i class="icon-cloud-upload text-success"></i> Fare Upload Feature <span class="badge badge-info">NEW</span>
+        </a>
+        <a href="#" class="dropdown-item">
+          <i class="icon-bell text-danger"></i> Red Alert Emails <span class="badge badge-secondary">YA2AA</span>
+        </a>
+        <a href="#" class="dropdown-item">
+          <i class="icon-chart text-warning"></i> Fares Updated
+        </a>
+        <a href="#" class="dropdown-item">
+          <i class="icon-note text-primary"></i> Footnote Changed
+        </a>
+      </div>
+    </li> -->
+    <!-- MESSAGES -->
+    <!-- <li class="nav-item dropdown d-md-down-none" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="false">
+        <i class="icon-envelope-letter"></i><span class="badge badge-pill badge-success">4</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center"><strong>You have 4 messages</strong></div>
+        <a href="#" class="dropdown-item">
+          <div class="message">
+            <div class="py-3 mr-3 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Naraj</small>
+              <small class="text-muted float-right mt-1">Just now</small>
+            </div>
+            <div class="text-truncate font-weight-bold"><span class="fa fa-exclamation text-danger"></span> Important
+              message</div>
+            <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt...</div>
+          </div>
+        </a>
+        <a href="#" class="dropdown-item">
+          <div class="message">
+            <div class="py-3 mr-3 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-warning"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Clara</small>
+              <small class="text-muted float-right mt-1">5 minutes ago</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt...</div>
+          </div>
+        </a>
+        <a href="#" class="dropdown-item">
+          <div class="message">
+            <div class="py-3 mr-3 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-danger"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Shilpa</small>
+              <small class="text-muted float-right mt-1">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt...</div>
+          </div>
+        </a>
+        <a href="#" class="dropdown-item">
+          <div class="message">
+            <div class="py-3 mr-3 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-info"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Tyler</small>
+              <small class="text-muted float-right mt-1">2:50 AM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <div class="small text-muted text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt...</div>
+          </div>
+        </a>
+        <a href="#" class="dropdown-item text-center">
+          <strong>View all messages</strong>
+        </a>
+      </div>
+    </li> -->
+    <!-- USER -->
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link dropdown-toggle mr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+        aria-expanded="false" dropdownToggle (click)="false">
+        <!-- <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/> -->
+        <i class="fa fa-user" style="color: #c2cfd6"></i><span class="d-md-down-none ml-2">ATP1AXW</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <a class="dropdown-item" href="#"><i class="icon-question"></i> Help</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Contact</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Feedback</a>
+        <!-- <a class="dropdown-item" href="#"><i class="icon-settings"></i> Settings</a> -->
+        <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+      </div>
+    </li>
+    <!-- <button class="navbar-toggler d-md-down-none" type="button" appAsideMenuToggler>&#9776;</button> -->
+  </ul>
+</header>
+<div class="app-body">
+  <div class="sidebar">
+    <nav class="sidebar-nav">
+      <ul class="nav">
+        <li class="nav-title">
+          Components
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/search']"><i class="icon-list"></i> Market View
+            By Fare</a>
+        </li>
+        <!-- <li class="divider"></li> -->
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link"><i class="icon-calendar"></i> Total
+            Price By Date</a>
+        </li>
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link"><i class="icon-docs"></i> Total Price
+            Comparison</a>
+        </li>
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link"><i class="icon-calculator"></i> Total
+            Price By Fare</a>
+        </li>
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link"><i class="icon-layers"></i> Change
+            Monitoring</a>
+        </li>
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link"><i class="icon-globe"></i> Web
+            Fares</a>
+        </li>
+
+
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/charts']"><i class="icon-pie-chart"></i> Web Fares<span class="badge badge-info">BETA</span></a>
+        </li> -->
+        <!-- <li class="divider"></li> -->
+        <!-- <li class="nav-title">
+          UDG
+        </li> -->
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link"><i class="icon-star"></i> Manage UDG</a>
+        </li>
+        <!-- <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-star"></i> Manage UDG</a>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <a class="nav-link pl-4"><i class="icon-location-pin"></i> Location</a>
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pl-4"><i class="icon-plane"></i> Carrier</a>
+
+            </li>
+          </ul>
+        </li> -->
+        <!-- <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-layers"></i> UI Kits</a>
+
+          <ul class="nav-dropdown-items">
+            <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+              <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-speech"></i> Invoicing</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active" [routerLink]="['/uikits/invoicing/invoice']"><i class="icon-speech"></i> Invoice</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+              <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-speech"></i> Email</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active" [routerLink]="['/uikits/email/inbox']"><i class="icon-speech"></i> Inbox</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active" [routerLink]="['/uikits/email/message']"><i class="icon-speech"></i> Message</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLinkActive="active" [routerLink]="['/uikits/email/compose']"><i class="icon-speech"></i> Compose</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="divider m-2"></li>
+        <li class="nav-title">
+          Labels
+        </li>
+        <li class="nav-item hidden-cn">
+          <a class="nav-label" href="#"><i class="fa fa-circle text-danger"></i> Label danger</a>
+        </li> -->
+        <!-- <li class="nav-item hidden-cn">
+          <a class="nav-label" href="#"><i class="fa fa-circle text-info"></i> Label info</a>
+        </li>
+        <li class="nav-item hidden-cn">
+          <a class="nav-label" href="#"><i class="fa fa-circle text-warning"></i> Label warning</a>
+        </li>
+        <li class="divider"></li>
+        <li class="nav-title">
+          System Utilization
+        </li> -->
+        <!-- <li class="nav-item px-3 hidden-cn">
+          <div class="text-uppercase mb-1"><small><b>CPU Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">348 Processes. 1/4 Cores.</small>
+        </li>
+        <li class="nav-item px-3 hidden-cn">
+          <div class="text-uppercase mb-1"><small><b>Memory Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">11444GB/16384MB</small>
+        </li>
+        <li class="nav-item px-3 hidden-cn">
+          <div class="text-uppercase mb-1"><small><b>SSD 1 Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">243GB/256GB</small>
+        </li> -->
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <main class="main">
+
+    <!-- SECONDARY NAVBAR -->
+    <ol class="breadcrumb" *ngIf="false">
+
+      <!-- <app-breadcrumbs></app-breadcrumbs> -->
+
+      <!-- SUMMARY BREADCRUMB -->
+      <div
+        *ngIf="router.url == '/change-monitoring/summary' && !utilityService.isFareDetails && !utilityService.isFareDetailsCIF && !utilityService.isFootnoteDetails && !utilityService.isRuleDetails && !utilityService.isRuleText">
+        <li class="breadcrumb-item">
+          <span>Summary</span>
+        </li>
+      </div>
+
+      <!-- FARE DETAILS BREADCRUMB -->
+      <div
+        *ngIf="router.url == '/change-monitoring/summary' && utilityService.isFareDetails && !utilityService.isFareDetailsCIF && !utilityService.isFootnoteDetails && !utilityService.isRuleDetails && !utilityService.isRuleText">
+        <li class="breadcrumb-item">
+          <a href="#/change-monitoring/summary">Summary</a>
+        </li>
+        <li class="breadcrumb-item">
+          <span>Fare Details</span>
+        </li>
+      </div>
+
+      <!-- FARE DETAILS CIF BREADCRUMB -->
+      <div
+        *ngIf="router.url == '/change-monitoring/summary' && utilityService.isFareDetails && utilityService.isFareDetailsCIF && !utilityService.isFootnoteDetails && !utilityService.isRuleDetails && !utilityService.isRuleText">
+        <li class="breadcrumb-item">
+          <a href="#/change-monitoring/summary">Summary</a>
+        </li>
+        <li class="breadcrumb-item">
+          <span>Fare Details with CIF</span>
+        </li>
+      </div>
+
+      <!-- FOOTNOTE BREADCRUMB -->
+      <div
+        *ngIf="router.url == '/change-monitoring/summary' && utilityService.isFareDetails && utilityService.isFareDetailsCIF && utilityService.isFootnoteDetails && !utilityService.isRuleDetails && !utilityService.isRuleText">
+        <li class="breadcrumb-item">
+          <a href="#/change-monitoring/summary">Summary</a>
+        </li>
+        <li class="breadcrumb-item">
+          <span>Footnote Details</span>
+        </li>
+      </div>
+
+
+
+
+      <!-- RULE TEXT BREADCRUMB -->
+      <div *ngIf="router.url == '/change-monitoring/summary' && utilityService.isRuleText && !utilityService.flag">
+        <li class="breadcrumb-item">
+          <a href="#/change-monitoring/summary">Summary</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="#/change-monitoring/summary" (click)="onRuleDetailsClicked()">Rule Details</a>
+        </li>
+        <li class="breadcrumb-item">
+          <span>Rule Text</span>
+        </li>
+      </div>
+
+      <!-- RULE DETAILS BREADCRUMB -->
+      <div
+        *ngIf="router.url == '/change-monitoring/summary' && utilityService.isRuleDetails && !utilityService.isRuleText || utilityService.flag">
+        <li class="breadcrumb-item">
+          <a href="#/change-monitoring/summary">Summary</a>
+        </li>
+        <li class="breadcrumb-item">
+          <span>Rule Details</span>
+        </li>
+      </div>
+
+
+      <!-- RIGHT MENU-->
+      <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <!-- <a class="btn" href="#"><i class="icon-speech"></i></a>
+          <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a> -->
+          <a class="btn" href="#"><i class="icon-tag"></i> &nbsp;Save Searches</a>
+        </div>
+      </li>
+    </ol>
+
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div><!-- /.conainer-fluid -->
+  </main>
+
+  <aside class="aside-menu">
+    <tabset>
+      <tab>
+        <ng-template tabHeading><i class="icon-list"></i></ng-template>
+        <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
+          <small><b>Today</b></small>
+        </div>
+        <hr class="transparent mx-3 my-0">
+        <div class="callout callout-warning m-0 py-3">
+          <div class="avatar float-right">
+            <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+          </div>
+          <div>Meeting with <strong>Lucas</strong></div>
+          <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
+          <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA </small>
+        </div>
+        <hr class="mx-3 my-0">
+        <div class="callout callout-info m-0 py-3">
+          <div class="avatar float-right">
+            <img src="assets/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+          </div>
+          <div>Skype with <strong>Megan</strong></div>
+          <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 4 - 5pm</small>
+          <small class="text-muted"><i class="icon-social-skype"></i>&nbsp; On-line </small>
+        </div>
+        <hr class="transparent mx-3 my-0">
+        <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
+          <small><b>Tomorrow</b></small>
+        </div>
+        <hr class="transparent mx-3 my-0">
+        <div class="callout callout-danger m-0 py-3">
+          <div>New UI Project - <strong>deadline</strong></div>
+          <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
+          <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ </small>
+          <div class="avatars-stack mt-2">
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+          </div>
+        </div>
+        <hr class="mx-3 my-0">
+        <div class="callout callout-success m-0 py-3">
+          <div><strong>#10 Startups.Garden</strong> Meetup</div>
+          <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
+          <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA </small>
+        </div>
+        <hr class="mx-3 my-0">
+        <div class="callout callout-primary m-0 py-3">
+          <div><strong>Team meeting</strong></div>
+          <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 4 - 6pm</small>
+          <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ </small>
+          <div class="avatars-stack mt-2">
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img src="assets/img/avatars/8.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+            </div>
+          </div>
+        </div>
+        <hr class="mx-3 my-0">
+      </tab>
+      <tab>
+        <ng-template tabHeading><i class="icon-speech"></i></ng-template>
+        <div class="p-3">
+          <div class="message">
+            <div class="py-3 pb-5 mr-3 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-1">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt...</small>
+          </div>
+          <hr>
+          <div class="message">
+            <div class="py-3 pb-5 mr-3 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-1">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt...</small>
+          </div>
+          <hr>
+          <div class="message">
+            <div class="py-3 pb-5 mr-3 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-1">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt...</small>
+          </div>
+          <hr>
+          <div class="message">
+            <div class="py-3 pb-5 mr-3 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-1">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt...</small>
+          </div>
+          <hr>
+          <div class="message">
+            <div class="py-3 pb-5 mr-3 float-left">
+              <div class="avatar">
+                <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <span class="avatar-status badge-success"></span>
+              </div>
+            </div>
+            <div>
+              <small class="text-muted">Lukasz Holeczek</small>
+              <small class="text-muted float-right mt-1">1:52 PM</small>
+            </div>
+            <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+              incididunt...</small>
+          </div>
+        </div>
+      </tab>
+      <tab>
+        <ng-template tabHeading><i class="icon-settings"></i></ng-template>
+        <div class="p-3">
+          <h6>Settings</h6>
+
+          <div class="aside-options">
+            <div class="clearfix mt-4">
+              <small><b>Option 1</b></small>
+              <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <input type="checkbox" class="switch-input" checked>
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+            <div>
+              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.</small>
+            </div>
+          </div>
+
+          <div class="aside-options">
+            <div class="clearfix mt-3">
+              <small><b>Option 2</b></small>
+              <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <input type="checkbox" class="switch-input">
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+            <div>
+              <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.</small>
+            </div>
+          </div>
+
+          <div class="aside-options">
+            <div class="clearfix mt-3">
+              <small><b>Option 3</b></small>
+              <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <input type="checkbox" class="switch-input">
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="aside-options">
+            <div class="clearfix mt-3">
+              <small><b>Option 4</b></small>
+              <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <input type="checkbox" class="switch-input" checked>
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
+              </label>
+            </div>
+          </div>
+
+          <hr>
+          <h6>System Utilization</h6>
+
+          <div class="text-uppercase mb-1 mt-4"><small><b>CPU Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+              aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">348 Processes. 1/4 Cores.</small>
+
+          <div class="text-uppercase mb-1 mt-2"><small><b>Memory Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70"
+              aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">11444GB/16384MB</small>
+
+          <div class="text-uppercase mb-1 mt-2"><small><b>SSD 1 Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95"
+              aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">243GB/256GB</small>
+
+          <div class="text-uppercase mb-1 mt-2"><small><b>SSD 2 Usage</b></small></div>
+          <div class="progress progress-xs">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10"
+              aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <small class="text-muted">25GB/256GB</small>
+        </div>
+      </tab>
+    </tabset>
+  </aside>
+</div>
+<footer class="app-footer">
+  <!-- <a href="https://genesisui.com">Alba</a> &copy; 2017 creativeLabs. -->
+  <span class="float-right">
+    Sidebar Prototype v2
+  </span>
+</footer>
