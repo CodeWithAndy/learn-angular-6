@@ -19,7 +19,7 @@
         *ngIf="router.url == '/change-monitoring/summary'">Footnote
         Details</a>
     </li>
-    <li class="nav-item px-3"
+    <li class="nav-item px-3 rule-details"
       *ngIf="router.url == '/change-monitoring/summary' && utilityService.isRuleDetails && !utilityService.isRuleText">
       <a class="nav-link" [routerLink]="['/change-monitoring/summary']"
         *ngIf="router.url == '/change-monitoring/summary'">Rule Details</a>
@@ -34,7 +34,7 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown"
         (click)="utilityService.flag = false">
-        <a class="dropdown-item" [routerLink]="['/change-monitoring/summary']"><i class="icon-book-open"></i> Rule
+        <a class="dropdown-item" [routerLink]="['/change-monitoring/summary']"> Rule
           Text</a>
       </div>
     </li>
@@ -119,7 +119,7 @@
               </div>
             </div>
             <div>
-              <small class="text-muted">Nabaj</small>
+              <small class="text-muted">Naraj</small>
               <small class="text-muted float-right mt-1">Just now</small>
             </div>
             <div class="text-truncate font-weight-bold"><span class="fa fa-exclamation text-danger"></span> Important
@@ -398,7 +398,7 @@
   <main class="main">
 
     <!-- SECONDARY NAVBAR -->
-    <ol class="breadcrumb" *ngIf="router.url == '/search' || router.url == '/change-monitoring/summary'">
+    <ol class="breadcrumb" *ngIf="router.url == '/change-monitoring/summary'">
 
       <!-- <app-breadcrumbs></app-breadcrumbs> -->
       <div *ngIf="router.url == '/change-monitoring/summary'">
@@ -757,6 +757,6 @@
 <footer class="app-footer">
   <!-- <a href="https://genesisui.com">Alba</a> &copy; 2017 creativeLabs. -->
   <span class="float-right">
-    Sidebar Prototype by <a href="https://www.atpco.net/">ATPCO</a>
+    Sidebar Prototype v1
   </span>
 </footer>
