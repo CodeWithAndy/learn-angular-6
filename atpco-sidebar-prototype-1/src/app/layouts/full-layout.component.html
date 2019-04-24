@@ -179,6 +179,21 @@
           Results
         </li>
         <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
+          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-layers"></i> Change
+            Monitoring</a>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <a class="nav-link pl-4" routerLinkActive="active" [routerLink]="['/change-monitoring/summary']"><i
+                  class="icon-list"></i> Summary</a>
+            </li>
+            <li class="nav-item">
+              <!-- <a class="nav-link ml-2" routerLinkActive="active" [routerLink]="['/change-monitoring/spinners']"><i class="icon-pie-chart"></i> CIF</a> -->
+              <a class="nav-link pl-4"><i class="icon-pie-chart"></i> CIF</a>
+
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
           <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-list"></i> Market View By
             Fare</a>
           <ul class="nav-dropdown-items">
@@ -223,21 +238,6 @@
             <li class="nav-item">
               <!-- <a class="nav-link ml-2" routerLinkActive="active" [routerLink]="['/change-monitoring/calendar']"><i class="icon-grid"></i> Grid</a> -->
               <a class="nav-link pl-4"><i class="icon-grid"></i> Grid</a>
-
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
-          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="icon-layers"></i> Change
-            Monitoring</a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-              <a class="nav-link pl-4" routerLinkActive="active" [routerLink]="['/change-monitoring/summary']"><i
-                  class="icon-list"></i> Summary</a>
-            </li>
-            <li class="nav-item">
-              <!-- <a class="nav-link ml-2" routerLinkActive="active" [routerLink]="['/change-monitoring/spinners']"><i class="icon-pie-chart"></i> CIF</a> -->
-              <a class="nav-link pl-4"><i class="icon-pie-chart"></i> CIF</a>
 
             </li>
           </ul>
