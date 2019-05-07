@@ -1,0 +1,67 @@
+.app-header.navbar .navbar-brand {
+    display: inline-block;
+    width: 200px;
+    height: 55px;
+    padding: .75rem 1rem;
+    margin-right: 0;
+    background-color: #20a8d8;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 70px auto;
+    border-bottom: 1px solid #1d97c2;
+    color: white;
+    font-size: 18px;
+}
+
+.app-header.navbar .navbar-toggler {
+    outline: none;
+}
+
+.sidebar .nav-link {
+    font-size: 12px;
+}
+
+.beta {
+    float: none !important;
+}
+
+.breadcrumb {
+    min-height: 50px;
+    // padding-left: 50px;
+}
+
+.breadcrumb .nav-link.dropdown-toggle {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+// .breadcrumb .active-link {
+//   color: #20a8d8 !important;
+//   border-bottom: none !important;
+// }
+
+.active-link {
+    border-bottom: 2px solid #20a8d8 !important;
+}
+
+.active-link:hover>.dropdown-menu {
+    display: block !important;
+}
+
+.btn {
+    border-radius: .25rem;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.x {
+  color: black;
+}
+
+.tab-item {
+  float: left;
+  position: relative;
+}
