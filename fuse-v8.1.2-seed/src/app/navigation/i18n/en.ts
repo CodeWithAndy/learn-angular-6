@@ -4,7 +4,7 @@ export const locale = {
         'NAV': {
             'APPLICATIONS': 'Applications',
             'SAMPLE'        : {
-                'TITLE': 'MarketView',
+                'TITLE': 'Market View',
                 // 'BADGE': '25'
             }
         }
