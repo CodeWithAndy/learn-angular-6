@@ -8,12 +8,12 @@ export const navigation: FuseNavigation[] = [
         type: 'group',
         children: [
             {
-                id: 'home',
-                title: 'Home',
-                translate: 'Home',
+                id: 'dashboard',
+                title: 'Dashboard',
+                translate: 'Dashboard',
                 type: 'item',
-                icon: 'home',
-                url: '/home'
+                icon: 'dashboard',
+                url: '/dashboard'
             }
         ]
     },
@@ -24,12 +24,12 @@ export const navigation: FuseNavigation[] = [
         type: 'group',
         children: [
             {
-                id: 'sample',
-                title: 'Sample',
-                translate: 'NAV.SAMPLE.TITLE',
+                id: 'market-view',
+                title: 'Market View',
+                translate: 'Market View',
                 type: 'item',
                 icon: 'insert_chart',
-                url: '/search'
+                url: '/market-view'
             }
         ]
     },

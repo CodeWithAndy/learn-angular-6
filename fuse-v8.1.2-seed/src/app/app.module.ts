@@ -22,7 +22,7 @@ import { SampleModule } from 'app/main/sample/sample.module';
 const appRoutes: Routes = [
     {
         path      : '**',
-        redirectTo: 'search'
+        redirectTo: 'dashboard'
     }
 ];
 
