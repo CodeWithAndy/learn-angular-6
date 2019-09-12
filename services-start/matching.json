@@ -1,0 +1,51 @@
+// UI => SKIPPER
+{
+  "request": {
+    "hostFare": "MVMergedFareObject",
+    "OA": ["listOfCarriers"],
+    "criteria": [{
+      "field": "field",
+      "operation": "operation",
+      "value": "value"
+
+    }],
+    "listOfCategories": ["listOFCategories"]
+  },
+  "response": {
+    "listOfFares": ["listOfFares"]
+  }
+}
+// SKIPPER => FARE MATCHER SERVICE
+{
+  "request": {
+    "hostFare": "MVMergedFareObject",
+    "OA": ["listOfCarriers"],
+    "queryId": "queryId"
+  },
+  "response": {
+    "collectionName": "collectionName"
+  }
+}
+// STRATEGY RESPONSE
+{
+  "request": ?,
+  "response": {
+    "origin": "origin",
+    "destination": "destination",
+    "carrier": "tariff",
+    "baseAmount": "baseAmount",
+    "cabin": "cabin",
+    "OW/RT": "OW/RT",
+    "fareExpiry": "fareExpiry",
+    "PTC": "PTC",
+    "season": "season",
+    "AP": "AP",
+    "minStay": "minStay",
+    "DOW": "dayOfWeek",
+    "requestPlusAdditionalFields": "requestPlusAdditionalFields",
+    "action": "action",
+    "newAmount": "newAmount",
+    "previouAmount": "previousAmount",
+    "OA": ["listOfCarriers"]
+  }
+}
