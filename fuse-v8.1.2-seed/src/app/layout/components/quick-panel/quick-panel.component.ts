@@ -21,9 +21,9 @@ export class QuickPanelComponent
         // Set the defaults
         this.date = new Date();
         this.settings = {
-            notify: true,
-            cloud : false,
-            retro : true
+            notify: false,
+            cloud : true,
+            retro : false
         };
     }
 }

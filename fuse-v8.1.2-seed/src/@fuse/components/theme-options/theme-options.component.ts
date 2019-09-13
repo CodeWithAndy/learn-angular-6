@@ -133,6 +133,7 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy
         const customFunctionNavItem = {
             id      : 'custom-function',
             title   : 'Theme Options',
+            translate: 'Customize',
             type    : 'group',
             icon    : 'settings',
             children: [
@@ -143,6 +144,11 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy
                     icon    : 'settings',
                     function: () => {
                         this.toggleSidebarOpen('themeOptionsPanel');
+                    },
+                    badge    : {
+                        title    : 'demo',
+                        bg       : '#0099CC',
+                        fg       : '#FFFFFF'
                     }
                 }
             ]
