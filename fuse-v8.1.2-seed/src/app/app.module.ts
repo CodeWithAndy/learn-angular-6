@@ -17,7 +17,7 @@ import { fuseConfig } from 'app/fuse-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
+import { DashboardModule } from 'app/main/dashboard/dashboard.module';
 
 const appRoutes: Routes = [
     {
@@ -54,7 +54,7 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule,
-        SampleModule
+        DashboardModule
     ],
     bootstrap   : [
         AppComponent
