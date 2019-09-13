@@ -30,8 +30,8 @@ export const fuseConfig: FuseConfig = {
             position             : 'below-static'
         },
         footer   : {
-            customBackgroundColor: true,
-            background           : 'fuse-navy-900',
+            customBackgroundColor: false,
+            background           : 'fuse-white-500',
             hidden               : true,
             position             : 'below-fixed'
         },
