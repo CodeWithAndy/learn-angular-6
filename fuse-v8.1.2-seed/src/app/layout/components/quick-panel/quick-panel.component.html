@@ -1,4 +1,4 @@
-<div fxLayout="column" fxFlex fusePerfectScrollbar>
+<!-- <div fxLayout="column" fxFlex fusePerfectScrollbar>
 
     <mat-list class="date" cdkFocusRegionStart>
 
@@ -20,28 +20,7 @@
 
     <mat-divider cdkFocusRegionEnd></mat-divider>
 
-    <!-- <mat-list>
-        <h3 matSubheader>
-            <span>Events</span>
-        </h3>
-
-        <mat-list-item *ngFor="let event of events">
-            <h3 matLine>{{event.title}}</h3>
-            <p matLine class="secondary-text">{{event.detail}}</p>
-        </mat-list-item>
-    </mat-list>
-
-    <mat-divider></mat-divider> -->
-
     <mat-list>
-        <!-- <h3 matSubheader>
-            <span>Time</span>
-        </h3> -->
-
-        <!-- <mat-list-item *ngFor="let note of notes">
-            <h3 matLine>{{note.title}}</h3>
-            <p matLine class="secondary-text">{{note.detail}}</p>
-        </mat-list-item> -->
         <mat-list-item>
             <h3 matLine>Next Subs Publication</h3>
             <p matLine class="secondary-text">{{date | date:'h:mm a'}}</p>
@@ -78,4 +57,69 @@
         </mat-list-item>
     </mat-list>
 
+</div> -->
+
+<div fxLayout="column" fxFlex fusePerfectScrollbar class="save-search-panel">
+    <div class="p-24">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <h1 class="d-inline-block">Saved Searches</h1>
+            <button
+                mat-icon-button
+                class="close-button"
+                (click)="toggleSidebarOpen('quickPanel')"
+            >
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <form class="example-form">
+            <div fxFlex>
+                <mat-tab-group mat-align-tabs="center" color="accent">
+                    <mat-tab label="My Saved Searches">
+                        <mat-form-field class="mt-24 d-block">
+                            <mat-label>Select Search</mat-label>
+                            <input
+                                type="text"
+                                aria-label="Number"
+                                matInput
+                                [formControl]="myControl"
+                                [matAutocomplete]="auto"
+                            />
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option
+                                    *ngFor="
+                                        let option of filteredOptions | async
+                                    "
+                                    [value]="option"
+                                >
+                                    {{ option }}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </mat-tab>
+                    <mat-tab label="All Saved Searches">
+                        <mat-form-field class="mt-24 d-block">
+                            <mat-label>Select Search</mat-label>
+                            <input
+                                type="text"
+                                aria-label="Number"
+                                matInput
+                                [formControl]="myControl"
+                                [matAutocomplete]="auto"
+                            />
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option
+                                    *ngFor="
+                                        let option of filteredOptions | async
+                                    "
+                                    [value]="option"
+                                >
+                                    {{ option }}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </form>
+    </div>
 </div>

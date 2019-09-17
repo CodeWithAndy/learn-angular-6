@@ -147,7 +147,7 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy
                     },
                     badge    : {
                         title    : 'demo',
-                        bg       : '#00C851',
+                        bg       : '#0099CC',
                         fg       : '#FFFFFF'
                     }
                 }
