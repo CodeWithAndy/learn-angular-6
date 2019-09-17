@@ -1,14 +1,15 @@
 <div class="page-layout simple left-sidebar inner-sidebar inner-scroll">
     <!-- HEADER -->
     <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
-        <button
+        <!-- TODO TOGGLE SIDE BAR -->
+        <!-- <button
             mat-icon-button
             class="sidebar-toggle mr-8"
             fxHide.gt-xs
             (click)="toggleSidebar('simple-left-sidebar-3')"
         >
             <mat-icon>menu</mat-icon>
-        </button>
+        </button> -->
 
         <div>
             <h2>Market View By Fare</h2>
@@ -124,18 +125,21 @@
             <div class="content p-24">
                 <!-- DEMO CONTENT -->
                 <div class="demo-content line-height-1.75">
-                    <h1 class="m-0">Search Criteria</h1>
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <h1 class="m-0 d-inline-block">Search Criteria</h1>
+                        <a class="cursor-pointer" (click)="toggleSidebarOpen('quickPanel')">Saved Searches</a>
+                        <!-- <button
+                            mat-icon-button
+                            aria-label="Toggle save search"
+                            (click)="toggleSidebarOpen('quickPanel')"
+                        >
+                            <mat-icon class="secondary-text">save</mat-icon>
+                        </button> -->
+                    </div>
                     <h4 class="mt-0 secondary-text">
                         Enter search criteria below. Additional query options
                         may be added to customize your search.
                     </h4>
-                    <button
-                        mat-icon-button
-                        aria-label="Toggle save search"
-                        (click)="toggleSidebarOpen('quickPanel')"
-                    >
-                        <mat-icon class="secondary-text">save</mat-icon>
-                    </button>
                     <mat-divider></mat-divider>
 
                     <div
