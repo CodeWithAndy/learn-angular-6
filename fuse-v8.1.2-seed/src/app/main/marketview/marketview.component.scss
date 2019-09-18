@@ -1,0 +1,25 @@
+.market-view {
+    .center {
+        .border {
+            border: 1px solid red;
+        }
+        .btn-fw {
+            min-width: 85px;
+        }
+        // .content {
+        //     background: inherit;
+        // }
+    }
+    .custom-search-sidebar {
+        width: initial;
+        min-width: initial;
+        max-width: initial;
+
+        .mat-list-base .mat-list-item {
+            height: 36px;
+        }
+        .mat-checkbox {
+            font-size: 14px;
+        }
+    }
+}

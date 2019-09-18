@@ -1,0 +1,314 @@
+<div class="custom-search page-layout simple left-sidebar inner-sidebar inner-scroll">
+        <!-- HEADER -->
+        <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
+            <!-- TODO TOGGLE SIDE BAR -->
+            
+            <!-- <button
+                mat-icon-button
+                class="sidebar-toggle mr-8"
+                fxHide.gt-xs
+                (click)="toggleSidebar('simple-left-sidebar-3')"
+            >
+                <mat-icon>menu</mat-icon>
+            </button> -->
+    
+            <div>
+                <h2>Market View By Fare</h2>
+            </div>
+        </div>
+        <!-- / HEADER -->
+    
+        <!-- CONTENT -->
+        <div class="content">
+            <!-- SIDEBAR -->
+            <fuse-sidebar
+                class="sidebar"
+                name="simple-left-sidebar-3"
+                position="left"
+                lockedOpen="gt-xs"
+            >
+                <div class="content p-24" fusePerfectScrollbar>
+                    <div class="demo-sidebar">
+                        <h3>Custom Search</h3>
+                        <mat-list>
+                            <h4 matSubheader>Product Type</h4>
+                            <mat-list-item>
+                                <mat-checkbox>All Product Type</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox checked="true"
+                                    >PUB | Public Specified</mat-checkbox
+                                >
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>PVT | Private Specified</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox
+                                    >CNP | Public Constructed</mat-checkbox
+                                >
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox
+                                    >CNV | Private Constructed</mat-checkbox
+                                >
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>All Fares By Rule</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox
+                                    >FBP | Pulic Fare By Rule</mat-checkbox
+                                >
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox
+                                    >FBV | Private Fare By Rule</mat-checkbox
+                                >
+                            </mat-list-item>
+                        </mat-list>
+                        <mat-list>
+                            <h4 matSubheader>OW/RT</h4>
+                            <mat-list-item>
+                                <mat-checkbox>All Product Type</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox checked="true"
+                                    >PUB | Public Specified</mat-checkbox
+                                >
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox
+                                    >FBV | Private Fare By Rule</mat-checkbox
+                                >
+                            </mat-list-item>
+                        </mat-list>
+                        <mat-list>
+                            <h4 matSubheader>Additional Search Options</h4>
+                            <mat-list-item>
+                                <mat-checkbox>AP</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>Currency</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>Fare Type Code</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>Footnote</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>Max Stay</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>Min Stay</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>RBD</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>Routing</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>Rule</mat-checkbox>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <mat-checkbox>Seasonality</mat-checkbox>
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                </div>
+            </fuse-sidebar>
+            <!-- / SIDEBAR -->
+    
+            <!-- CENTER -->
+            <div class="center p-24" fusePerfectScrollbar>
+                <div class="content p-24">
+                    <!-- DEMO CONTENT -->
+                    <div class="demo-content line-height-1.75">
+                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                            <h1 class="m-0 d-inline-block">Search Criteria</h1>
+                            <a
+                                class="cursor-pointer"
+                                (click)="toggleSidebarOpen('quickPanel')"
+                                >Saved Searches</a
+                            >
+                        </div>
+                        <h4 class="mt-0 secondary-text">
+                            Enter search criteria below. Additional query options
+                            may be added to customize your search.
+                        </h4>
+                        <!-- <mat-divider class="my-12"></mat-divider> -->
+    
+                        <div>
+                            <div
+                                fxLayout="row wrap"
+                                fxLayout.xs="column wrap"
+                                fxLayoutAlign="start center"
+                                fxLayoutGap="10px"
+                            >
+                                <div fxFlex="30">
+                                    <mat-form-field class="w-100-p">
+                                        <input
+                                            matInput
+                                            [matDatepicker]="effectiveOnDate"
+                                            placeholder="Effective On"
+                                            required
+                                        />
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="effectiveOnDate"
+                                        ></mat-datepicker-toggle>
+                                        <mat-datepicker
+                                            #effectiveOnDate
+                                        ></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="30">
+                                    <mat-form-field class="w-100-p">
+                                        <input
+                                            matInput
+                                            [matDatepicker]="firstTravelDate"
+                                            placeholder="First Travel Date"
+                                            required
+                                        />
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="firstTravelDate"
+                                        ></mat-datepicker-toggle>
+                                        <mat-datepicker
+                                            #firstTravelDate
+                                        ></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <mat-divider class="my-12"></mat-divider>
+                            <h4 class="mb-0 accent-fg">Search 1</h4>
+                            <div
+                                fxLayout="row wrap"
+                                fxLayout.xs="column wrap"
+                                fxLayoutAlign="start center"
+                                fxLayoutGap="10px"
+                            >
+                                <div fxFlex="20">
+                                    <mat-form-field>
+                                        <mat-label>Product Type</mat-label>
+                                        <input matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="20">
+                                    <mat-form-field>
+                                        <mat-label>OW/RT</mat-label>
+                                        <input matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="20">
+                                    <mat-form-field>
+                                        <mat-label>Market</mat-label>
+                                        <input matInput />
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="20">
+                                    <mat-form-field>
+                                        <mat-label>Fare Class</mat-label>
+                                        <input matInput />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div
+                                fxLayout="row wrap"
+                                fxLayout.xs="column wrap"
+                                fxLayoutAlign="start center"
+                                fxLayoutGap="10px"
+                            >
+                                <div fxFlex="20">
+                                    <mat-form-field>
+                                        <mat-label>Origin</mat-label>
+                                        <input matInput [formControl]="origin" required/>
+                                        <mat-error
+                                            *ngIf="origin.hasError('required')"
+                                        >
+                                            Origin is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="20">
+                                    <mat-form-field>
+                                        <mat-label>Destination</mat-label>
+                                        <input
+                                            matInput
+                                            [formControl]="destination"
+                                            required
+                                        />
+                                        <mat-error
+                                            *ngIf="destination.hasError('required')"
+                                        >
+                                            Destination is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="20">
+                                    <mat-form-field>
+                                        <mat-label>Carrier</mat-label>
+                                        <input matInput [formControl]="carrier" required/>
+                                        <mat-error
+                                            *ngIf="carrier.hasError('required')"
+                                        >
+                                            Carrier is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlexOffset="auto" fxFlex="20" fxLayoutAlign="end">
+                                    <button mat-mini-fab color="primary">
+                                        <mat-icon matTooltip="Add">add</mat-icon>
+                                    </button>
+                                    <button
+                                        mat-mini-fab
+                                        color="primary"
+                                        class="ml-4"
+                                    >
+                                        <mat-icon matTooltip="Copy"
+                                            >file_copy</mat-icon
+                                        >
+                                    </button>
+                                </div>
+                            </div>
+    
+                            <mat-divider class="my-12"></mat-divider>
+    
+                            <!-- BUTTONS -->
+                            <div
+                                class="my-24"
+                                fxLayout="row wrap"
+                                fxLayout.xs="column wrap"
+                                fxLayoutAlign="end center"
+                            >
+                                <button
+                                    mat-raised-button
+                                    color="primary"
+                                    class="btn-fw"
+                                >
+                                    Search
+                                </button>
+                                <button mat-raised-button class="ml-8 btn-fw">
+                                    Clear
+                                </button>
+                                <button mat-raised-button class="ml-8 btn-fw">
+                                    Save
+                                </button>
+                                <button mat-raised-button class="ml-8 btn-fw">
+                                    Save As
+                                </button>
+                            </div>
+                            <!-- PLACE HOLDER -->
+                            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                        </div>
+                        <!-- / DEMO CONTENT -->
+                    </div>
+                </div>
+                <!-- / CENTER -->
+            </div>
+            <!-- / CONTENT -->
+        </div>
+    </div>
+    

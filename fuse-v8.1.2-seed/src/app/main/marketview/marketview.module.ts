@@ -12,6 +12,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 const routes = [
     {
@@ -36,6 +39,9 @@ const routes = [
     MatInputModule,
     MatTooltipModule,
     MatButtonModule,
+    MatTabsModule,
+    MatOptionModule,
+    MatSelectModule,
     FuseSidebarModule
   ],
   exports : [
