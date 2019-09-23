@@ -30,3 +30,11 @@
     background-color: #33b5e5 !important;
     color: white !important;
 }
+
+/* AG GRID */
+.ag-theme-material .ag-row-selected {
+    background-color: #FFB745;
+}
+.ag-theme-material .ag-cell-range-selected-1:not(.ag-cell-focus), .ag-theme-material .ag-cell-range-selected {
+    background-color: rgb(255, 215, 149);
+}

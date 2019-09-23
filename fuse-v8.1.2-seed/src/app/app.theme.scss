@@ -33,6 +33,40 @@ $pi-cyan: (
         A700 : #000000,
     )
 );
+$pi-cyan-dark: (
+    50 : #e0eff2,
+    100 : #b3d7e0,
+    200 : #80bdcb,
+    300 : #4da3b6,
+    400 : #268fa6,
+    500 : #007b96,
+    600 : #00738e,
+    700 : #006883,
+    800 : #005e79,
+    900 : #004b68,
+    A100 : #97ddff,
+    A200 : #64ccff,
+    A400 : #31bbff,
+    A700 : #18b3ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
 $pi-green: (
     50 : #edf4e7,
     100 : #d3e4c3,
@@ -120,6 +154,9 @@ $custom_palettes: (
     fuse-white: $fuse-white,
     fuse-black: $fuse-black,
     fuse-navy: $fuse-navy,
+    fuse-cyan: $pi-cyan,
+    fuse-cyan-dark: $pi-cyan-dark
+
 );
 
 @include fuse-color-classes($custom_palettes);
@@ -171,7 +208,7 @@ $theme: mat-light-theme($default-primary-palette, $default-accent-palette, $defa
 
 // Add ".theme-default" class to the body to activate this theme.
 // Class name must start with "theme-" !!!
-body.theme-default {
+body.theme-default-light {
 
     // Create an Angular Material theme from the $theme map
     @include angular-material-theme($theme);
@@ -267,7 +304,7 @@ body.theme-blue-gray-dark {
 // -----------------------------------------------------------------------------------------------------
 
 // Define the primary, accent and warn palettes
-$pink-dark-theme-primary-palette: mat-palette($mat-pink);
+$pink-dark-theme-primary-palette: mat-palette($pi-cyan);
 $pink-dark-theme-accent-palette: mat-palette($pi-cyan);
 $pink-dark-theme-warn-palette: mat-palette($mat-red);
 
@@ -276,7 +313,7 @@ $pink-dark-theme: mat-dark-theme($pink-dark-theme-primary-palette, $pink-dark-th
 
 // Add ".theme-pink-dark" class to the body to activate this theme.
 // Class name must start with "theme-" !!!
-body.theme-pink-dark {
+body.theme-default-dark {
 
     // Generate the Angular Material theme
     @include angular-material-theme($pink-dark-theme);

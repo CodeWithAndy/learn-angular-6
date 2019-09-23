@@ -10,7 +10,7 @@ import { FuseConfig } from '@fuse/types';
 
 export const fuseConfig: FuseConfig = {
     // Color themes can be defined in src/app/app.theme.scss
-    colorTheme      : 'theme-default',
+    colorTheme      : 'theme-default-light',
     customScrollbars: true,
     layout          : {
         style    : 'vertical-layout-1',
@@ -24,8 +24,8 @@ export const fuseConfig: FuseConfig = {
             variant            : 'vertical-style-2'
         },
         toolbar  : {
-            customBackgroundColor: false,
-            background           : 'fuse-white-500',
+            customBackgroundColor: true,
+            background           : 'fuse-cyan-dark-500',
             hidden               : false,
             position             : 'below-static'
         },
@@ -36,7 +36,7 @@ export const fuseConfig: FuseConfig = {
             position             : 'below-fixed'
         },
         sidepanel: {
-            hidden  : false,
+            hidden  : true,
             position: 'right'
         }
     }
