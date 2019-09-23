@@ -15,6 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PizzaPartyComponent } from './snackbar.component';
+import { DialogContentExampleDialog } from './dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const routes = [
     {
@@ -25,7 +29,9 @@ const routes = [
 
 @NgModule({
   declarations: [
-    MarketviewComponent
+    MarketviewComponent,
+    PizzaPartyComponent,
+    DialogContentExampleDialog
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -42,10 +48,16 @@ const routes = [
     MatTabsModule,
     MatOptionModule,
     MatSelectModule,
+    MatSnackBarModule,
+    MatDialogModule,
     FuseSidebarModule
   ],
   exports : [
     MarketviewComponent
+  ],
+  entryComponents : [
+      PizzaPartyComponent,
+      DialogContentExampleDialog
   ]
 })
 export class MarketviewModule { }

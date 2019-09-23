@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
 import 'ag-grid-enterprise';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { PizzaPartyComponent } from './snackbar.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogContentExampleDialog } from './dialog.component';
 
 @Component({
     selector: 'app-marketview',
@@ -44,7 +48,7 @@ export class MarketviewComponent implements OnInit {
     rowSelection;
     sideBar;
 
-    constructor(private fuseSidebarService: FuseSidebarService) {
+    constructor(private fuseSidebarService: FuseSidebarService, private _snackBar: MatSnackBar, public dialog: MatDialog) {
         this.columnDefs = [
             {
                 field: 'name',
@@ -162,6 +166,20 @@ export class MarketviewComponent implements OnInit {
             // defaultToolPanel: 'filters'
         };
     }
+
+    openSnackBar() {
+        this._snackBar.openFromComponent(PizzaPartyComponent, {
+            duration: 5 * 1000
+        });
+      }
+
+      openDialog() {
+        const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+      }
 
     onGridReady(params) {
         this.gridApi = params.api;
