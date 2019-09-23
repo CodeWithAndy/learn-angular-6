@@ -28,13 +28,7 @@ export class MarketviewComponent implements OnInit {
         'FPV | Public Fare By Rule'
     ];
     groupId = new FormControl();
-    groupIds: string[] = [
-        '1',
-        '2',
-        '3',
-        '4',
-        '5'
-    ];
+    groupIds: string[] = ['1', '2', '3', '4', '5'];
     minDate = new Date();
     maxDate = new Date(2019, 8, 27);
 
@@ -48,7 +42,11 @@ export class MarketviewComponent implements OnInit {
     rowSelection;
     sideBar;
 
-    constructor(private fuseSidebarService: FuseSidebarService, private _snackBar: MatSnackBar, public dialog: MatDialog) {
+    constructor(
+        private fuseSidebarService: FuseSidebarService,
+        private _snackBar: MatSnackBar,
+        public dialog: MatDialog
+    ) {
         this.columnDefs = [
             {
                 field: 'name',
@@ -131,6 +129,7 @@ export class MarketviewComponent implements OnInit {
             cellRendererParams: { checkbox: true }
         };
         this.defaultColDef = {
+            editable: true,
             checkboxSelection: function(params) {
                 var isGrouping =
                     params.columnApi.getRowGroupColumns().length > 0;
@@ -154,7 +153,7 @@ export class MarketviewComponent implements OnInit {
                     labelKey: 'filters',
                     iconKey: 'filter',
                     toolPanel: 'agFiltersToolPanel'
-                },
+                }
                 // {
                 //     id: "customStats",
                 //     labelDefault: "Custom Stats",
@@ -162,7 +161,7 @@ export class MarketviewComponent implements OnInit {
                 //     iconKey: "custom-stats",
                 //     toolPanel: "customStatsToolPanel"
                 // }
-            ],
+            ]
             // defaultToolPanel: 'filters'
         };
     }
@@ -172,19 +171,90 @@ export class MarketviewComponent implements OnInit {
             panelClass: ['success-snackbar'],
             duration: 5 * 1000
         });
-      }
+    }
 
-      openDialog() {
+    openDialog() {
         const dialogRef = this.dialog.open(DialogContentExampleDialog);
-    
+
         dialogRef.afterClosed().subscribe(result => {
-          console.log(`Dialog result: ${result}`);
+            console.log(`Dialog result: ${result}`);
         });
-      }
+    }
 
     onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
+    }
+
+    getContextMenuItems(params) {
+        var result = [
+            {
+                name: 'Actions',
+                subMenu: [
+                    'copy',
+                    'paste',
+                    {
+                        name: 'Clear',
+                        shortcut: 'Ctrl+B',
+                    },
+                    {
+                        name: 'Insert Single',
+                        shortcut: 'Ctrl+Shift+S',
+                    },
+                    {
+                        name: 'Insert Multiple',
+                        shortcut: 'Ctrl+Shift+L',
+                    },
+                    {
+                        name: 'Multi-Edit',
+                        shortcut: 'Ctrl+E',
+                    },
+                    {
+                        name: 'Multi-Filter',
+                        shortcut: 'Ctrl+F',
+                    },
+                    {
+                        name: 'Delete',
+                        shortcut: 'Ctrl+Q',
+                    },
+                    'separator',
+                    {
+                        name: 'Undo',
+                        shortcut: 'Ctrl+N',
+                    },
+                    {
+                        name: 'Redo',
+                        shortcut: 'Ctrl+R',
+                    }
+                ]
+            },
+            'separator',
+            {
+                name: 'Fare Construction'
+            },
+            {
+                name: 'Seasonality Details'
+            },
+            {
+                name: 'Surcharge Text'
+            },
+            {
+                name: 'YQ/YR Details'
+            },
+            {
+                name: 'Fare Rule Text',
+                disabled: true,
+                tooltip:
+                    'Disabled Example'
+            },
+            {
+                name: 'Travel Details',
+                disabled: true,
+                tooltip:
+                    'Disabled Example'
+            },
+        ];
+        return result;
     }
 
     ngOnInit() {}
