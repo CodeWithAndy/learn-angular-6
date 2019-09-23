@@ -19,6 +19,7 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { DashboardModule } from 'app/main/dashboard/dashboard.module';
 import { MarketviewModule } from './main/marketview/marketview.module';
+import { LicenseManager } from 'ag-grid-enterprise';
 
 const appRoutes: Routes = [
     {
@@ -26,6 +27,10 @@ const appRoutes: Routes = [
         redirectTo: 'dashboard'
     }
 ];
+
+LicenseManager.setLicenseKey(
+	'Atpco_MultiApp_2Devs29_August_2019__MTU2NzAzMzIwMDAwMA==20cd62cea5cb6f4ce0229eae696c262f'
+);
 
 @NgModule({
     declarations: [
@@ -56,7 +61,7 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         DashboardModule,
-        MarketviewModule
+        MarketviewModule,
     ],
     bootstrap   : [
         AppComponent

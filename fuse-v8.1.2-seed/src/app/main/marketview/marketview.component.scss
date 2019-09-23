@@ -1,15 +1,4 @@
 .market-view {
-    .center {
-        .border {
-            border: 1px solid red;
-        }
-        .btn-fw {
-            min-width: 85px;
-        }
-        // .content {
-        //     background: inherit;
-        // }
-    }
     .custom-search-sidebar {
         width: initial;
         min-width: initial;
@@ -22,4 +11,25 @@
             font-size: 14px;
         }
     }
+    .ag-theme-material .ag-icon-checkbox-checked {
+        color: #00abc7;
+    }
+}
+
+.border {
+    border: 1px solid red;
+}
+.btn-fw {
+    min-width: 85px;
+}
+
+.action-divider {
+    padding: 0 15px;
+    margin-left: 12px;
+    display: inline-block;
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+::ng-deep .ag-header, ::ng-deep .ag-header-row {
+    height: 50px !important;
 }

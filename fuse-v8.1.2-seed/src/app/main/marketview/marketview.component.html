@@ -19,7 +19,7 @@
     <!-- CONTENT -->
     <div class="content">
         <!-- <mat-tab-group dynamicHeight="true" color="accent" backgroundColor="accent"> -->
-        <mat-tab-group color="accent">
+        <mat-tab-group color="accent" selectedIndex="1">
             <mat-tab label="Search Criteria">
                 <div class="page-layout simple left-sidebar">
                     <!-- SIDEBAR -->
@@ -83,31 +83,16 @@
                                     </mat-list-item>
                                 </mat-list>
                                 <mat-list>
-                                    <h4 matSubheader>OW/RT</h4>
-                                    <mat-list-item>
-                                        <mat-checkbox
-                                            >All Product Type</mat-checkbox
-                                        >
-                                    </mat-list-item>
-                                    <mat-list-item>
-                                        <mat-checkbox checked="true"
-                                            >PUB | Public
-                                            Specified</mat-checkbox
-                                        >
-                                    </mat-list-item>
-                                    <mat-list-item>
-                                        <mat-checkbox
-                                            >FBV | Private Fare By
-                                            Rule</mat-checkbox
-                                        >
-                                    </mat-list-item>
-                                </mat-list>
-                                <mat-list>
                                     <h4 matSubheader>
                                         Additional Search Options
                                     </h4>
                                     <mat-list-item>
-                                        <mat-checkbox [(ngModel)]="ap">AP</mat-checkbox>
+                                        <mat-checkbox [(ngModel)]="ap"
+                                            >AP</mat-checkbox
+                                        >
+                                    </mat-list-item>
+                                    <mat-list-item>
+                                        <mat-checkbox>Country</mat-checkbox>
                                     </mat-list-item>
                                     <mat-list-item>
                                         <mat-checkbox>Currency</mat-checkbox>
@@ -182,7 +167,7 @@
                                         fxLayoutAlign="start center"
                                         fxLayoutGap="10px"
                                     >
-                                        <div fxFlex="30">
+                                        <div fxFlex="28">
                                             <mat-form-field class="w-100-p">
                                                 <input
                                                     matInput
@@ -203,7 +188,7 @@
                                                 ></mat-datepicker>
                                             </mat-form-field>
                                         </div>
-                                        <div fxFlex="30">
+                                        <div fxFlex="28">
                                             <mat-form-field class="w-100-p">
                                                 <input
                                                     matInput
@@ -235,7 +220,9 @@
                                     >
                                         <div fxFlex="20">
                                             <mat-form-field class="w-100-p">
-                                                <mat-label>Product Type</mat-label>
+                                                <mat-label
+                                                    >Product Type</mat-label
+                                                >
                                                 <mat-select
                                                     [formControl]="productType"
                                                     multiple
@@ -342,29 +329,19 @@
                                             </mat-form-field>
                                         </div>
                                         <div fxFlex="20">
-                                                <mat-form-field *ngIf="ap">
-                                                    <mat-label>AP</mat-label>
-                                                    <input matInput />
-                                                </mat-form-field>
-                                            </div>
-                                        <div
-                                            fxFlex="15"
-                                            fxLayoutAlign="end"
-                                        >
-                                            <button
-                                                mat-mini-fab
-                                                color="primary"
-                                            >
+                                            <mat-form-field *ngIf="ap">
+                                                <mat-label>AP</mat-label>
+                                                <input matInput />
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxFlex="15" fxLayoutAlign="end">
+                                            <button mat-icon-button>
                                                 <mat-icon matTooltip="Add"
                                                     >add</mat-icon
                                                 >
                                             </button>
-                                            <button
-                                                mat-mini-fab
-                                                color="primary"
-                                                class="ml-4"
-                                            >
-                                                <mat-icon matTooltip="Copy"
+                                            <button mat-icon-button>
+                                                <mat-icon matTooltip="Duplicate"
                                                     >file_copy</mat-icon
                                                 >
                                             </button>
@@ -418,8 +395,91 @@
             </mat-tab>
 
             <mat-tab label="Results Grid">
-                <div class="p-24">
-                    Results
+                <div fxLayout="column">
+                    <div
+                        class="action-toolbar px-12"
+                        fxLayout="row"
+                        fxLayoutAlign="space-between center"
+                        fxFlex
+                    >
+                        <div fxFlex>
+                            <button mat-icon-button>
+                                <mat-icon matTooltip="Insert"
+                                    >playlist_add</mat-icon
+                                >
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon matTooltip="Duplicate"
+                                    >file_copy</mat-icon
+                                >
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon matTooltip="Cancel">cancel</mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon matTooltip="Delete"
+                                    >delete_sweep</mat-icon
+                                >
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon matTooltip="Undo">undo</mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon matTooltip="Redo">redo</mat-icon>
+                            </button>
+                            <!-- <mat-divider
+                                class="action-divider mx-8"
+                                [vertical]="true"
+                            ></mat-divider> -->
+                            <div class="action-divider">
+                                <button mat-icon-button matTooltip="React">
+                                    <mat-icon>offline_bolt</mat-icon>
+                                    React
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            fxFlexOffset="auto"
+                            fxFlex
+                            fxLayoutAlign="end center"
+                        >
+                            <mat-form-field
+                                class="w-128 mx-16"
+                                floatLabel="never"
+                            >
+                                <mat-label>Group ID</mat-label>
+                                <mat-select [formControl]="groupId" multiple>
+                                    <mat-option
+                                        *ngFor="let id of groupIds"
+                                        [value]="id"
+                                        >{{ id }}</mat-option
+                                    >
+                                </mat-select>
+                            </mat-form-field>
+                            <button mat-raised-button class="mx-16 btn-fw">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                    <div style="overflow: hidden; flex-grow: 1;">
+                        <ag-grid-angular
+                            #agGrid
+                            style="width: 100%; height: 100%;"
+                            id="myGrid"
+                            class="ag-theme-material"
+                            [columnDefs]="columnDefs"
+                            [groupSelectsChildren]="true"
+                            [groupDefaultExpanded]="groupDefaultExpanded"
+                            [autoGroupColumnDef]="autoGroupColumnDef"
+                            [defaultColDef]="defaultColDef"
+                            [rowData]="rowData"
+                            [sideBar]="sideBar"
+                            [rowSelection]="rowSelection"
+                            [domLayout]="'autoHeight'"
+                            (gridReady)="onGridReady($event)"
+                        ></ag-grid-angular>
+                        <!-- [domLayout]="'autoHeight'" -->
+                    </div>
                 </div>
             </mat-tab>
         </mat-tab-group>
