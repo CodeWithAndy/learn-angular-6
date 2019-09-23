@@ -19,7 +19,8 @@
     <!-- CONTENT -->
     <div class="content">
         <!-- <mat-tab-group dynamicHeight="true" color="accent" backgroundColor="accent"> -->
-        <mat-tab-group color="accent" selectedIndex="1">
+        <!-- <mat-tab-group color="accent" selectedIndex="1"> -->
+        <mat-tab-group color="accent">
             <mat-tab label="Search Criteria">
                 <div class="page-layout simple left-sidebar">
                     <!-- SIDEBAR -->
@@ -160,192 +161,260 @@
                                 </h4>
                                 <!-- <mat-divider class="my-12"></mat-divider> -->
 
-                                <div>
+                                <form>
                                     <div
-                                        fxLayout="row wrap"
-                                        fxLayout.xs="column wrap"
+                                        fxLayout="row"
                                         fxLayoutAlign="start center"
-                                        fxLayoutGap="10px"
                                     >
-                                        <div fxFlex="28">
-                                            <mat-form-field class="w-100-p">
-                                                <input
-                                                    matInput
-                                                    [matDatepicker]="
-                                                        effectiveOnDate
-                                                    "
-                                                    [min]="minDate"
-                                                    [max]="maxDate"
-                                                    placeholder="Effective On"
-                                                    required
-                                                />
-                                                <mat-datepicker-toggle
-                                                    matSuffix
-                                                    [for]="effectiveOnDate"
-                                                ></mat-datepicker-toggle>
-                                                <mat-datepicker
-                                                    #effectiveOnDate
-                                                ></mat-datepicker>
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="28">
-                                            <mat-form-field class="w-100-p">
-                                                <input
-                                                    matInput
-                                                    [matDatepicker]="
-                                                        firstTravelDate
-                                                    "
-                                                    [min]="minDate"
-                                                    [max]="maxDate"
-                                                    placeholder="First Travel Date"
-                                                    required
-                                                />
-                                                <mat-datepicker-toggle
-                                                    matSuffix
-                                                    [for]="firstTravelDate"
-                                                ></mat-datepicker-toggle>
-                                                <mat-datepicker
-                                                    #firstTravelDate
-                                                ></mat-datepicker>
-                                            </mat-form-field>
+                                        <div fxFlex="90">
+                                            <div
+                                                fxLayout="row"
+                                                fxLayout.sm="column wrap"
+                                                fxLayoutAlign="start center"
+                                                fxLayoutGap="10px"
+                                            >
+                                                <div fxFlex="25">
+                                                    <mat-form-field
+                                                        class="w-180"
+                                                    >
+                                                        <input
+                                                            matInput
+                                                            [matDatepicker]="
+                                                                effectiveOnDate
+                                                            "
+                                                            [min]="minDate"
+                                                            [max]="maxDate"
+                                                            placeholder="Effective On"
+                                                            required
+                                                        />
+                                                        <mat-datepicker-toggle
+                                                            matSuffix
+                                                            [for]="
+                                                                effectiveOnDate
+                                                            "
+                                                        ></mat-datepicker-toggle>
+                                                        <mat-datepicker
+                                                            #effectiveOnDate
+                                                        ></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="25">
+                                                    <mat-form-field
+                                                        class="w-180"
+                                                    >
+                                                        <input
+                                                            matInput
+                                                            [matDatepicker]="
+                                                                firstTravelDate
+                                                            "
+                                                            [min]="minDate"
+                                                            [max]="maxDate"
+                                                            placeholder="First Travel Date"
+                                                            required
+                                                        />
+                                                        <mat-datepicker-toggle
+                                                            matSuffix
+                                                            [for]="
+                                                                firstTravelDate
+                                                            "
+                                                        ></mat-datepicker-toggle>
+                                                        <mat-datepicker
+                                                            #firstTravelDate
+                                                        ></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <mat-divider class="my-12"></mat-divider>
-                                    <h4>Search 1</h4>
+
+                                    <!-- SEARCH CRITERIA -->
+                                    <h4 class="mb-4">Search 1</h4>
                                     <div
-                                        fxLayout="row wrap"
-                                        fxLayout.xs="column wrap"
+                                        fxLayout="row"
                                         fxLayoutAlign="start center"
-                                        fxLayoutGap="10px"
                                     >
-                                        <div fxFlex="20">
-                                            <mat-form-field class="w-100-p">
-                                                <mat-label
-                                                    >Product Type</mat-label
-                                                >
-                                                <mat-select
-                                                    [formControl]="productType"
-                                                    multiple
-                                                >
-                                                    <mat-option
-                                                        *ngFor="
-                                                            let product of productTypes
-                                                        "
-                                                        [value]="product"
-                                                        >{{
-                                                            product
-                                                        }}</mat-option
+                                        <div fxFlex="90">
+                                            <div
+                                                fxLayout="row"
+                                                fxLayout.sm="column wrap"
+                                                fxLayoutAlign="start center"
+                                                fxLayoutGap="10px"
+                                            >
+                                                <div fxFlex="25">
+                                                    <mat-form-field
+                                                        class="w-180"
                                                     >
-                                                </mat-select>
-                                            </mat-form-field>
+                                                        <mat-label
+                                                            >Product
+                                                            Type</mat-label
+                                                        >
+                                                        <mat-select
+                                                            [formControl]="
+                                                                productType
+                                                            "
+                                                            multiple
+                                                        >
+                                                            <mat-option
+                                                                *ngFor="
+                                                                    let product of productTypes
+                                                                "
+                                                                [value]="
+                                                                    product
+                                                                "
+                                                                >{{
+                                                                    product
+                                                                }}</mat-option
+                                                            >
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="25">
+                                                    <mat-form-field>
+                                                        <mat-label
+                                                            >OW/RT</mat-label
+                                                        >
+                                                        <input matInput />
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="25">
+                                                    <mat-form-field>
+                                                        <mat-label
+                                                            >Market</mat-label
+                                                        >
+                                                        <input matInput />
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="25">
+                                                    <mat-form-field>
+                                                        <mat-label
+                                                            >Fare
+                                                            Class</mat-label
+                                                        >
+                                                        <input matInput />
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div
+                                                fxLayout="row"
+                                                fxLayout.sm="column wrap"
+                                                fxLayoutAlign="start center"
+                                                fxLayoutGap="10px"
+                                            >
+                                                <div fxFlex="25">
+                                                    <mat-form-field>
+                                                        <mat-label
+                                                            >Origin</mat-label
+                                                        >
+                                                        <input
+                                                            matInput
+                                                            [formControl]="
+                                                                origin
+                                                            "
+                                                            required
+                                                        />
+                                                        <mat-error
+                                                            *ngIf="
+                                                                origin.hasError(
+                                                                    'required'
+                                                                )
+                                                            "
+                                                        >
+                                                            Origin is
+                                                            <strong
+                                                                >required</strong
+                                                            >
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="25">
+                                                    <mat-form-field>
+                                                        <mat-label
+                                                            >Destination</mat-label
+                                                        >
+                                                        <input
+                                                            matInput
+                                                            [formControl]="
+                                                                destination
+                                                            "
+                                                            required
+                                                        />
+                                                        <mat-error
+                                                            *ngIf="
+                                                                destination.hasError(
+                                                                    'required'
+                                                                )
+                                                            "
+                                                        >
+                                                            Destination is
+                                                            <strong
+                                                                >required</strong
+                                                            >
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="25">
+                                                    <mat-form-field>
+                                                        <mat-label
+                                                            >Carrier</mat-label
+                                                        >
+                                                        <input
+                                                            matInput
+                                                            [formControl]="
+                                                                carrier
+                                                            "
+                                                            required
+                                                        />
+                                                        <mat-error
+                                                            *ngIf="
+                                                                carrier.hasError(
+                                                                    'required'
+                                                                )
+                                                            "
+                                                        >
+                                                            Carrier is
+                                                            <strong
+                                                                >required</strong
+                                                            >
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div fxFlex="25">
+                                                    <mat-form-field *ngIf="ap">
+                                                        <mat-label
+                                                            >AP</mat-label
+                                                        >
+                                                        <input matInput />
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div fxFlex="20">
-                                            <mat-form-field>
-                                                <mat-label>OW/RT</mat-label>
-                                                <input matInput />
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="20">
-                                            <mat-form-field>
-                                                <mat-label>Market</mat-label>
-                                                <input matInput />
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="20">
-                                            <mat-form-field>
-                                                <mat-label
-                                                    >Fare Class</mat-label
+                                        <div fxFlex="10" fxFlexFill>
+                                            <div
+                                                fxLayout="column"
+                                                fxLayoutAlign="center center"
+                                            >
+                                                <button
+                                                    mat-icon-button
+                                                    color="accent"
                                                 >
-                                                <input matInput />
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-                                    <div
-                                        fxLayout="row wrap"
-                                        fxLayout.xs="column wrap"
-                                        fxLayoutAlign="start center"
-                                        fxLayoutGap="10px"
-                                    >
-                                        <div fxFlex="20">
-                                            <mat-form-field>
-                                                <mat-label>Origin</mat-label>
-                                                <input
-                                                    matInput
-                                                    [formControl]="origin"
-                                                    required
-                                                />
-                                                <mat-error
-                                                    *ngIf="
-                                                        origin.hasError(
-                                                            'required'
-                                                        )
-                                                    "
+                                                    <mat-icon matTooltip="Add"
+                                                        >add</mat-icon
+                                                    >
+                                                </button>
+                                                <button
+                                                    mat-icon-button
+                                                    color="accent"
                                                 >
-                                                    Origin is
-                                                    <strong>required</strong>
-                                                </mat-error>
-                                            </mat-form-field>
+                                                    <mat-icon
+                                                        matTooltip="Duplicate"
+                                                        >file_copy</mat-icon
+                                                    >
+                                                </button>
+                                            </div>
                                         </div>
-                                        <div fxFlex="20">
-                                            <mat-form-field>
-                                                <mat-label
-                                                    >Destination</mat-label
-                                                >
-                                                <input
-                                                    matInput
-                                                    [formControl]="destination"
-                                                    required
-                                                />
-                                                <mat-error
-                                                    *ngIf="
-                                                        destination.hasError(
-                                                            'required'
-                                                        )
-                                                    "
-                                                >
-                                                    Destination is
-                                                    <strong>required</strong>
-                                                </mat-error>
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="20">
-                                            <mat-form-field>
-                                                <mat-label>Carrier</mat-label>
-                                                <input
-                                                    matInput
-                                                    [formControl]="carrier"
-                                                    required
-                                                />
-                                                <mat-error
-                                                    *ngIf="
-                                                        carrier.hasError(
-                                                            'required'
-                                                        )
-                                                    "
-                                                >
-                                                    Carrier is
-                                                    <strong>required</strong>
-                                                </mat-error>
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="20">
-                                            <mat-form-field *ngIf="ap">
-                                                <mat-label>AP</mat-label>
-                                                <input matInput />
-                                            </mat-form-field>
-                                        </div>
-                                        <div fxFlex="15" fxLayoutAlign="end">
-                                            <button mat-icon-button>
-                                                <mat-icon matTooltip="Add"
-                                                    >add</mat-icon
-                                                >
-                                            </button>
-                                            <button mat-icon-button>
-                                                <mat-icon matTooltip="Duplicate"
-                                                    >file_copy</mat-icon
-                                                >
-                                            </button>
-                                        </div>
+
+                                        <br /><br /><br /><br /><br /><br />
                                     </div>
 
                                     <mat-divider class="my-12"></mat-divider>
@@ -385,7 +454,7 @@
                                             Save As
                                         </button>
                                     </div>
-                                </div>
+                                </form>
                                 <!-- / DEMO CONTENT -->
                             </div>
                             <!-- / DEMO CONTENT -->
