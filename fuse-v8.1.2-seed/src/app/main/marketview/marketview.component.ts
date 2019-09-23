@@ -437,6 +437,6 @@ function createRowItem(row) {
     rowItem.game = {
         name: games[Math.floor(((row * 13) / 17) * 19) % games.length]
     };
-    rowItem.gameName = 'toolTip: ' + rowItem.game.name.toUpperCase();
+    // rowItem.gameName = 'toolTip: ' + rowItem.game.name.toUpperCase();
     return rowItem;
 }

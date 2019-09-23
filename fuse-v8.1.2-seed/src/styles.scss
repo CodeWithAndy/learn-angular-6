@@ -17,7 +17,7 @@ $accent-color: mat-color(map-get($theme, accent));
 // Import ag-grid
 @import "~ag-grid-community/dist/styles/ag-grid.css";
 @import '~ag-grid-community/src/styles/ag-theme-material/sass/ag-theme-material';
-// @import '~ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham';
+@import '~ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham';
 
 
 // Import custom.scss
