@@ -226,6 +226,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <mat-divider class="my-12"></mat-divider>
 
                                     <!-- SEARCH CRITERIA -->
@@ -442,7 +443,7 @@
                                         <button
                                             mat-raised-button
                                             class="ml-8 btn-fw"
-                                            (click)="openSnackBar()"
+                                            (click)="openSuccessSnackBar()"
                                         >
                                             Save
                                         </button>
@@ -527,7 +528,7 @@
                                     >
                                 </mat-select>
                             </mat-form-field>
-                            <button mat-raised-button class="mx-16 btn-fw">
+                            <button mat-raised-button class="mx-16 btn-fw" (click)="openSuccessSnackBar()">
                                 Save
                             </button>
                         </div>

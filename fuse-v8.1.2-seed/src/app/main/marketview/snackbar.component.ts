@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'snack-bar-component-example-snack',
-    template: `<span class="example-pizza-party">
-                    Save Example
-                </span>`,
+    template: `<div class="example-pizza-party">
+                    <mat-icon>save</mat-icon><span class="p-8">Save Snackbar Example</span>
+                </div>`,
     styles: [`
-      .example-pizza-party {
-        color: white;
+      .example-pizza-party mat-icon {
+        vertical-align: sub;
       }
     `],
   })

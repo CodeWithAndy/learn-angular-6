@@ -167,8 +167,9 @@ export class MarketviewComponent implements OnInit {
         };
     }
 
-    openSnackBar() {
+    openSuccessSnackBar() {
         this._snackBar.openFromComponent(PizzaPartyComponent, {
+            panelClass: ['success-snackbar'],
             duration: 5 * 1000
         });
       }
