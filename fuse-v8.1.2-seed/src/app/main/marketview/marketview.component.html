@@ -1,15 +1,6 @@
 <div class="market-view page-layout simple tabbed">
     <!-- HEADER -->
     <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
-        <button
-            mat-icon-button
-            class="sidebar-toggle mr-8"
-            fxHide.gt-sm
-            (click)="toggleSidebarOpen('custom-search-sidebar')"
-        >
-            <mat-icon>more_vert</mat-icon>
-        </button>
-
         <div>
             <h2>Market View By Fare</h2>
         </div>
@@ -20,7 +11,7 @@
     <div class="content">
         <!-- <mat-tab-group dynamicHeight="true" color="accent" backgroundColor="accent"> -->
         <!-- <mat-tab-group color="accent" selectedIndex="1"> -->
-        <mat-tab-group color="accent">
+            <mat-tab-group color="accent">
             <mat-tab label="Search Criteria">
                 <div class="page-layout simple left-sidebar">
                     <!-- SIDEBAR -->
@@ -141,6 +132,18 @@
                                     fxLayout="row"
                                     fxLayoutAlign="space-between center"
                                 >
+                                    <button
+                                        mat-icon-button
+                                        class="sidebar-toggle mr-8"
+                                        fxHide.gt-sm
+                                        (click)="
+                                            toggleSidebarOpen(
+                                                'custom-search-sidebar'
+                                            )
+                                        "
+                                    >
+                                        <mat-icon>more_vert</mat-icon>
+                                    </button>
                                     <h1 class="m-0 d-inline-block">
                                         Search Criteria
                                     </h1>
@@ -185,7 +188,6 @@
                                                             [min]="minDate"
                                                             [max]="maxDate"
                                                             placeholder="Effective On"
-                                                            required
                                                         />
                                                         <mat-datepicker-toggle
                                                             matSuffix
@@ -210,7 +212,6 @@
                                                             [min]="minDate"
                                                             [max]="maxDate"
                                                             placeholder="First Travel Date"
-                                                            required
                                                         />
                                                         <mat-datepicker-toggle
                                                             matSuffix
@@ -271,11 +272,23 @@
                                                     </mat-form-field>
                                                 </div>
                                                 <div fxFlex="25">
-                                                    <mat-form-field>
+                                                    <mat-form-field class="w-100-p">
                                                         <mat-label
                                                             >OW/RT</mat-label
                                                         >
-                                                        <input matInput />
+                                                        <mat-select
+                                                            [formControl]="owrt"
+                                                        >
+                                                            <mat-option
+                                                                *ngFor="
+                                                                    let owrt of owrtList
+                                                                "
+                                                                [value]="owrt"
+                                                                >{{
+                                                                    owrt
+                                                                }}</mat-option
+                                                            >
+                                                        </mat-select>
                                                     </mat-form-field>
                                                 </div>
                                                 <div fxFlex="25">
@@ -504,7 +517,11 @@
                                 [vertical]="true"
                             ></mat-divider> -->
                             <div class="action-divider">
-                                <button mat-icon-button matTooltip="React" color="primary">
+                                <button
+                                    mat-icon-button
+                                    matTooltip="React"
+                                    color="primary"
+                                >
                                     <mat-icon>offline_bolt</mat-icon>
                                     React
                                 </button>
@@ -528,7 +545,11 @@
                                     >
                                 </mat-select>
                             </mat-form-field>
-                            <button mat-raised-button class="mx-16 btn-fw" (click)="openSuccessSnackBar()">
+                            <button
+                                mat-raised-button
+                                class="mx-16 btn-fw"
+                                (click)="openSuccessSnackBar()"
+                            >
                                 Save
                             </button>
                         </div>

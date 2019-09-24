@@ -27,6 +27,12 @@ export class MarketviewComponent implements OnInit {
         'FBP | Public Fare By Rule',
         'FPV | Public Fare By Rule'
     ];
+    owrt = new FormControl();
+    owrtList: number[] = [
+        1,
+        2,
+        3
+    ];
     groupId = new FormControl();
     groupIds: string[] = ['1', '2', '3', '4', '5'];
     minDate = new Date();
@@ -49,94 +55,161 @@ export class MarketviewComponent implements OnInit {
     ) {
         this.columnDefs = [
             {
-                field: 'name',
-                headerName: 'Name',
-                rowGroup: true,
-                hide: true
+                field: 'MRKT',
+                headerName: 'MRKT'
             },
             {
-                headerName: 'Game Name',
-                field: 'game.name',
-                width: 267,
-                editable: true,
-                filter: 'agSetColumnFilter',
-                tooltipField: 'gameName',
-                checkboxSelection: function(params) {
-                    return params.columnApi.getRowGroupColumns().length === 0;
-                },
-                cellClass: function() {
-                    return 'alphabet';
-                }
+                field: 'CXR',
+                headerName: 'CXR'
             },
             {
-                headerName: 'Country',
-                field: 'country',
-                width: 200,
-                editable: true,
+                field: 'ORIG',
+                headerName: 'ORIG'
+            },
+            {
+                field: 'DEST',
+                headerName: 'DEST'
+            },
+            {
+                field: 'OR',
+                headerName: 'O/R',
                 cellEditor: 'agRichSelectCellEditor',
                 cellEditorParams: {
                     values: [
-                        'Argentina',
-                        'Brazil',
-                        'Colombia',
-                        'France',
-                        'Germany',
-                        'Greece',
-                        'Iceland',
-                        'Ireland',
-                        'Italy',
-                        'Malta',
-                        'Portugal',
-                        'Norway',
-                        'Peru',
-                        'Spain',
-                        'Sweden',
-                        'United Kingdom',
-                        'Uruguay',
-                        'Venezuela'
+                        1,
+                        2,
+                        3
                     ]
                 },
-                floatCell: true,
-                filterParams: {
-                    cellHeight: 20,
-                    newRowsAction: 'keep'
-                }
+                filter: 'agSetColumnFilter',
+
             },
             {
-                headerName: 'Language',
-                field: 'language',
-                width: 200,
-                editable: true,
-                filter: 'agSetColumnFilter',
-                cellEditor: 'agSelectCellEditor',
-                cellEditorParams: {
-                    values: [
-                        'English',
-                        'Spanish',
-                        'French',
-                        'Portuguese',
-                        '(other)'
-                    ]
-                }
-            }
+                field: 'CUR',
+                headerName: 'CUR'
+            },
+            {
+                field: 'baseFareAmt',
+                headerName: 'Base Fare AMT',
+                filter: 'agNumberColumnFilter'
+            },
+            {
+                field: 'qwAmt',
+                headerName: 'QW AMT',
+                filter: 'agNumberColumnFilter'
+            },
+            {
+                field: 'rtAmt',
+                headerName: 'RT AMT',
+                filter: 'agNumberColumnFilter'
+            },
+            {
+                field: 'fareClass',
+                headerName: 'Fare Class'
+            },
+            {
+                field: 'FTC',
+                headerName: 'FTC'
+            },
+            {
+                field: 'yqyrAmt',
+                headerName: 'YQ/YR AMT',
+                filter: 'agNumberColumnFilter'
+            },
+            {
+                field: 'yqyrRoutingOutbound',
+                headerName: 'YQ/YR Routing Outbound'
+            },
+            {
+                field: 'yqyrRoutingInbound',
+                headerName: 'YQ/YR Routing Inbound'
+            },
+            {
+                field: 'AP',
+                headerName: 'AP'
+            },
+            {
+                field: 'minStay',
+                headerName: 'Min Stay'
+            },
+            {
+                field: 'maxStay',
+                headerName: 'Max Stay'
+            },
+
+
+            // {
+            //     headerName: 'Country',
+            //     field: 'country',
+            //     width: 200,
+            //     editable: true,
+            //     cellEditor: 'agRichSelectCellEditor',
+            //     cellEditorParams: {
+            //         values: [
+            //             'Argentina',
+            //             'Brazil',
+            //             'Colombia',
+            //             'France',
+            //             'Germany',
+            //             'Greece',
+            //             'Iceland',
+            //             'Ireland',
+            //             'Italy',
+            //             'Malta',
+            //             'Portugal',
+            //             'Norway',
+            //             'Peru',
+            //             'Spain',
+            //             'Sweden',
+            //             'United Kingdom',
+            //             'Uruguay',
+            //             'Venezuela'
+            //         ]
+            //     },
+            //     floatCell: true,
+            //     filterParams: {
+            //         cellHeight: 20,
+            //         newRowsAction: 'keep'
+            //     }
+            // },
+            // {
+            //     headerName: 'Language',
+            //     field: 'language',
+            //     width: 200,
+            //     editable: true,
+            //     filter: 'agSetColumnFilter',
+            //     cellEditor: 'agSelectCellEditor',
+            //     cellEditorParams: {
+            //         values: [
+            //             'English',
+            //             'Spanish',
+            //             'French',
+            //             'Portuguese',
+            //             '(other)'
+            //         ]
+            //     }
+            // }
         ];
-        this.groupDefaultExpanded = -1;
-        this.autoGroupColumnDef = {
-            headerName: 'Name',
-            field: 'name',
-            width: 250,
-            editable: true,
-            cellRendererParams: { checkbox: true }
-        };
+        // this.groupDefaultExpanded = -1;
+        // this.autoGroupColumnDef = {
+        //     headerName: 'Name',
+        //     field: 'name',
+        //     width: 250,
+        //     editable: true,
+        //     cellRendererParams: { checkbox: true }
+        // };
         this.defaultColDef = {
             editable: true,
-            checkboxSelection: function(params) {
-                var isGrouping =
-                    params.columnApi.getRowGroupColumns().length > 0;
-                return params.colIndex === 0 && !isGrouping;
-            }
+            filter: true,
+            sortable: true,
+            // checkboxSelection: function(params) {
+            //     var isGrouping =
+            //         params.columnApi.getRowGroupColumns().length > 0;
+            //     return params.colIndex === 0 && !isGrouping;
+            // }
         };
-        this.rowData = createData();
+        // this.rowData = createData();
+        this.rowData = getFares();
         this.rowSelection = 'multiple';
         this.sideBar = {
             toolPanels: [
@@ -184,6 +257,12 @@ export class MarketviewComponent implements OnInit {
     onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
+        // AUTO SIZE COLUMNS
+        // let allColumnIds = [];
+        // this.gridColumnApi.getAllColumns().forEach((column) => {
+        //     allColumnIds.push(column.colId);
+        // });
+        // this.gridColumnApi.autoSizeColumns(allColumnIds);
     }
 
     getContextMenuItems(params) {
@@ -262,6 +341,392 @@ export class MarketviewComponent implements OnInit {
     toggleSidebarOpen(key): void {
         this.fuseSidebarService.getSidebar(key).toggleOpen();
     }
+}
+
+function getFares() {
+    return [
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 5000,
+            qwAmt: 5000,
+            rtAmt: 10000,
+            fareClass: 'W1N0C9S1',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 6783,
+            qwAmt: 6783,
+            rtAmt: 13566,
+            fareClass: 'RNN0C9S3',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 299,
+            qwAmt: 299,
+            rtAmt: 598,
+            fareClass: 'YCA',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: 'IAD-LHR',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 400,
+            qwAmt: 400,
+            rtAmt: 800,
+            fareClass: 'YCA',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: 'IAD-LHR',
+            AP: '1',
+            minStay: '3',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 700,
+            qwAmt: 700,
+            rtAmt: 1400,
+            fareClass: 'VLW2T1M5',
+            FTC: 'ERU',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '3',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 5000,
+            qwAmt: 5000,
+            rtAmt: 10000,
+            fareClass: 'W1N0C9S1',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 6783,
+            qwAmt: 6783,
+            rtAmt: 13566,
+            fareClass: 'RNN0C9S3',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 299,
+            qwAmt: 299,
+            rtAmt: 598,
+            fareClass: 'YCA',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: 'IAD-LHR',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 400,
+            qwAmt: 400,
+            rtAmt: 800,
+            fareClass: 'YCA',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: 'IAD-LHR',
+            AP: '1',
+            minStay: '3',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 700,
+            qwAmt: 700,
+            rtAmt: 1400,
+            fareClass: 'VLW2T1M5',
+            FTC: 'ERU',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '3',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 5000,
+            qwAmt: 5000,
+            rtAmt: 10000,
+            fareClass: 'W1N0C9S1',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 6783,
+            qwAmt: 6783,
+            rtAmt: 13566,
+            fareClass: 'RNN0C9S3',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 299,
+            qwAmt: 299,
+            rtAmt: 598,
+            fareClass: 'YCA',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: 'IAD-LHR',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 400,
+            qwAmt: 400,
+            rtAmt: 800,
+            fareClass: 'YCA',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: 'IAD-LHR',
+            AP: '1',
+            minStay: '3',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 700,
+            qwAmt: 700,
+            rtAmt: 1400,
+            fareClass: 'VLW2T1M5',
+            FTC: 'ERU',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '3',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 5000,
+            qwAmt: 5000,
+            rtAmt: 10000,
+            fareClass: 'W1N0C9S1',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 6783,
+            qwAmt: 6783,
+            rtAmt: 13566,
+            fareClass: 'RNN0C9S3',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 299,
+            qwAmt: 299,
+            rtAmt: 598,
+            fareClass: 'YCA',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: 'IAD-LHR',
+            AP: '1',
+            minStay: '7|1|+',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 400,
+            qwAmt: 400,
+            rtAmt: 800,
+            fareClass: 'YCA',
+            FTC: 'XOX',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: 'IAD-LHR',
+            AP: '1',
+            minStay: '3',
+            maxStay: '3'
+        },
+        {
+            MRKT: 'WASLON',
+            CXR: 'AA',
+            ORIG: 'WAS',
+            DEST: 'LON',
+            OR: 2,
+            CUR: 'USD',
+            baseFareAmt: 700,
+            qwAmt: 700,
+            rtAmt: 1400,
+            fareClass: 'VLW2T1M5',
+            FTC: 'ERU',
+            yqyrAmt: 225,
+            yqyrRoutingOutbound: 'IAD-LHR',
+            yqyrRoutingInbound: '',
+            AP: '1',
+            minStay: '3',
+            maxStay: '3'
+        }
+    ];
+    
 }
 
 function countries() {
