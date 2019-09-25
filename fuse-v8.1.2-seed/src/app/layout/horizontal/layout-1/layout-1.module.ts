@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { FuseSidebarModule, FuseThemeOptionsModule } from '@fuse/components';
 import { FuseSharedModule } from '@fuse/shared.module';
@@ -11,18 +10,17 @@ import { QuickPanelModule } from 'app/layout/components/quick-panel/quick-panel.
 import { ToolbarModule } from 'app/layout/components/toolbar/toolbar.module';
 
 import { HorizontalLayout1Component } from 'app/layout/horizontal/layout-1/layout-1.component';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
     declarations: [
         HorizontalLayout1Component
     ],
     imports     : [
-        MatSidenavModule,
-
         FuseSharedModule,
         FuseSidebarModule,
         FuseThemeOptionsModule,
-
+        SharedModule,
         ContentModule,
         FooterModule,
         NavbarModule,

@@ -11,6 +11,7 @@ import { QuickPanelModule } from 'app/layout/components/quick-panel/quick-panel.
 import { ToolbarModule } from 'app/layout/components/toolbar/toolbar.module';
 
 import { VerticalLayout2Component } from 'app/layout/vertical/layout-2/layout-2.component';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,7 @@ import { VerticalLayout2Component } from 'app/layout/vertical/layout-2/layout-2.
 
         FuseSharedModule,
         FuseSidebarModule,
-
+        SharedModule,
         ContentModule,
         FooterModule,
         NavbarModule,

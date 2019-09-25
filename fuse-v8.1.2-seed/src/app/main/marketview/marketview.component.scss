@@ -1,9 +1,9 @@
+/* TODO: REFACTOR && CLEANUP AFTER FINAL WIREFRAMES */
 .market-view {
     .custom-search-sidebar {
         width: initial;
         min-width: initial;
         max-width: initial;
-
         .mat-list-base .mat-list-item {
             height: 36px;
         }
@@ -11,19 +11,14 @@
             font-size: 14px;
         }
     }
-    .ag-theme-material .ag-icon-checkbox-checked {
-        color: #00abc7;
+    .action-toolbar {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        min-height: 50px;
+        .action-divider {
+            padding: 0 15px;
+            margin-left: 12px;
+            display: inline-block;
+            border-left: 1px solid rgba(0, 0, 0, 0.15);
+        }
     }
-}
-
-.action-divider {
-    padding: 0 15px;
-    margin-left: 12px;
-    display: inline-block;
-    border-left: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-.action-toolbar {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    min-height: 50px;
 }

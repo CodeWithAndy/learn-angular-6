@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'snack-bar-component-example-snack',
-    template: `<div class="example-pizza-party">
+    selector: 'snack-bar-example',
+    template: `<div class="snack-bar-example">
                     <mat-icon>save</mat-icon><span class="p-8">Save Successful</span>
                 </div>`,
     styles: [`
-      .example-pizza-party mat-icon {
+      .snack-bar-example mat-icon {
         vertical-align: sub;
       }
     `],
   })
-  export class PizzaPartyComponent {}
+  export class SnackbarExampleComponent {}

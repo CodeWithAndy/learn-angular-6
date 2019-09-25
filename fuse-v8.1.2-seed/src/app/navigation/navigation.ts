@@ -39,30 +39,33 @@ export const navigation: FuseNavigation[] = [
     {
         id: 'user-preferences',
         title: 'User Preferences',
-        type: 'collapsable',
+        type: 'item',
         icon: 'person_add',
-        children: [
-            {
-                id: 'option-one',
-                title: 'Option 1',
-                type: 'item',
-                url: '/preferences',
-                exactMatch: true
-            },
-            {
-                id: 'option-two',
-                title: 'Option 2',
-                type: 'item',
-                url: '/preferences',
-                exactMatch: true
-            },
-            {
-                id: 'option-three',
-                title: 'Option 3',
-                type: 'item',
-                url: '/preferences',
-                exactMatch: true
-            }
-        ]
+        url: '/user-preferences',
+        // type: 'collapsable',
+        // icon: 'person_add',
+        // children: [
+        //     {
+        //         id: 'option-one',
+        //         title: 'Option 1',
+        //         type: 'item',
+        //         url: '/preferences',
+        //         exactMatch: true
+        //     },
+        //     {
+        //         id: 'option-two',
+        //         title: 'Option 2',
+        //         type: 'item',
+        //         url: '/preferences',
+        //         exactMatch: true
+        //     },
+        //     {
+        //         id: 'option-three',
+        //         title: 'Option 3',
+        //         type: 'item',
+        //         url: '/preferences',
+        //         exactMatch: true
+        //     }
+        // ]
     },
 ];

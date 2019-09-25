@@ -1,0 +1,23 @@
+// -----------------------------------------------------------------------------------------------------
+// @ Custom snackbar colors
+// -----------------------------------------------------------------------------------------------------
+/* TODO: Refactor final colors to variables || color palettes */
+.success-snackbar {
+    background-color: #4bbe72 !important;
+    color: white !important;
+}
+
+.warn-snackbar {
+    background-color: #ffbb33 !important;
+    color: white !important;
+}
+
+.error-snackbar {
+    background-color: #ff4444 !important;
+    color: white !important;
+}
+
+.info-snackbar {
+    background-color: #33b5e5 !important;
+    color: white !important;
+}

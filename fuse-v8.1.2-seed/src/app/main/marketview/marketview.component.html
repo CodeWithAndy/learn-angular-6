@@ -1,3 +1,4 @@
+<!-- TODO: REFACTOR -->
 <div class="market-view page-layout simple tabbed">
     <!-- HEADER -->
     <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
@@ -561,9 +562,6 @@
                             id="myGrid"
                             class="ag-theme-material"
                             [columnDefs]="columnDefs"
-                            [groupSelectsChildren]="true"
-                            [groupDefaultExpanded]="groupDefaultExpanded"
-                            [autoGroupColumnDef]="autoGroupColumnDef"
                             [enableRangeSelection]="true"
                             [allowContextMenuWithControlKey]="true"
                             [getContextMenuItems]="getContextMenuItems"
@@ -574,7 +572,7 @@
                             [domLayout]="'autoHeight'"
                             (gridReady)="onGridReady($event)"
                         ></ag-grid-angular>
-                        <!-- [domLayout]="'autoHeight'" -->
+                        <!-- [ngClass]="fuseConfig.colorTheme === 'theme-default-light' ? 'ag-theme-material' : 'ag-theme-balham-dark'" -->
                     </div>
                 </div>
             </mat-tab>

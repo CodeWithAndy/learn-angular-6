@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-
-import { FuseSharedModule } from '@fuse/shared.module';
-
 import { DashboardComponent } from './dashboard.component';
+import { SharedModule } from 'app/shared/shared.module';
+import { FuseSharedModule } from '@fuse/shared.module';
 
 const routes = [
     {
@@ -22,7 +21,8 @@ const routes = [
 
         TranslateModule,
 
-        FuseSharedModule
+        FuseSharedModule,
+        SharedModule
     ],
     exports     : [
         DashboardComponent

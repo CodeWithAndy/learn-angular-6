@@ -1,0 +1,18 @@
+// Import Fuse core library
+@import "../@fuse/scss/core";
+
+// Import Font Awesome
+// @import "~@fortawesome/fontawesome-free/css/all.css";
+
+// Import app.theme.scss
+@import "../app/app.theme";
+
+// Import partials
+@import "partials/variables";
+@import "partials/layout";
+@import "partials/ag-grid";
+@import "partials/buttons";
+@import "partials/typography";
+@import "partials/snackbars";
+@import "partials/helpers";
+@import "custom";

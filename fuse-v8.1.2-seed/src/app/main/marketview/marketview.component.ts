@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
-import 'ag-grid-enterprise';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PizzaPartyComponent } from './snackbar.component';
+import { SnackbarExampleComponent } from './snackbar-example.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogContentExampleDialog } from './dialog.component';
+import { SaveDialogComponent } from './save-dialog/save-dialog.component';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { FuseConfigService } from '@fuse/services/config.service';
 
 @Component({
     selector: 'app-marketview',
     templateUrl: './marketview.component.html',
     styleUrls: ['./marketview.component.scss']
 })
-export class MarketviewComponent implements OnInit {
+export class MarketviewComponent implements OnInit, OnDestroy {
     origin = new FormControl('', [Validators.required]);
     destination = new FormControl('', [Validators.required]);
     carrier = new FormControl('', [Validators.required]);
@@ -28,11 +30,7 @@ export class MarketviewComponent implements OnInit {
         'FPV | Public Fare By Rule'
     ];
     owrt = new FormControl();
-    owrtList: number[] = [
-        1,
-        2,
-        3
-    ];
+    owrtList: number[] = [1, 2, 3];
     groupId = new FormControl();
     groupIds: string[] = ['1', '2', '3', '4', '5'];
     minDate = new Date();
@@ -48,8 +46,12 @@ export class MarketviewComponent implements OnInit {
     rowSelection;
     sideBar;
 
+    private fuseConfig: any;
+    private unsubscribeAll: Subject<any>;
+
     constructor(
         private fuseSidebarService: FuseSidebarService,
+        private fuseConfigService: FuseConfigService,
         private _snackBar: MatSnackBar,
         public dialog: MatDialog
     ) {
@@ -75,14 +77,9 @@ export class MarketviewComponent implements OnInit {
                 headerName: 'O/R',
                 cellEditor: 'agRichSelectCellEditor',
                 cellEditorParams: {
-                    values: [
-                        1,
-                        2,
-                        3
-                    ]
+                    values: [1, 2, 3]
                 },
-                filter: 'agSetColumnFilter',
-
+                filter: 'agSetColumnFilter'
             },
             {
                 field: 'CUR',
@@ -135,81 +132,14 @@ export class MarketviewComponent implements OnInit {
             {
                 field: 'maxStay',
                 headerName: 'Max Stay'
-            },
-
-
-            // {
-            //     headerName: 'Country',
-            //     field: 'country',
-            //     width: 200,
-            //     editable: true,
-            //     cellEditor: 'agRichSelectCellEditor',
-            //     cellEditorParams: {
-            //         values: [
-            //             'Argentina',
-            //             'Brazil',
-            //             'Colombia',
-            //             'France',
-            //             'Germany',
-            //             'Greece',
-            //             'Iceland',
-            //             'Ireland',
-            //             'Italy',
-            //             'Malta',
-            //             'Portugal',
-            //             'Norway',
-            //             'Peru',
-            //             'Spain',
-            //             'Sweden',
-            //             'United Kingdom',
-            //             'Uruguay',
-            //             'Venezuela'
-            //         ]
-            //     },
-            //     floatCell: true,
-            //     filterParams: {
-            //         cellHeight: 20,
-            //         newRowsAction: 'keep'
-            //     }
-            // },
-            // {
-            //     headerName: 'Language',
-            //     field: 'language',
-            //     width: 200,
-            //     editable: true,
-            //     filter: 'agSetColumnFilter',
-            //     cellEditor: 'agSelectCellEditor',
-            //     cellEditorParams: {
-            //         values: [
-            //             'English',
-            //             'Spanish',
-            //             'French',
-            //             'Portuguese',
-            //             '(other)'
-            //         ]
-            //     }
-            // }
+            }
         ];
-        // this.groupDefaultExpanded = -1;
-        // this.autoGroupColumnDef = {
-        //     headerName: 'Name',
-        //     field: 'name',
-        //     width: 250,
-        //     editable: true,
-        //     cellRendererParams: { checkbox: true }
-        // };
         this.defaultColDef = {
             editable: true,
             filter: true,
-            sortable: true,
-            // checkboxSelection: function(params) {
-            //     var isGrouping =
-            //         params.columnApi.getRowGroupColumns().length > 0;
-            //     return params.colIndex === 0 && !isGrouping;
-            // }
+            sortable: true
         };
-        // this.rowData = createData();
-        this.rowData = getFares();
+        this.rowData = this.getFares();
         this.rowSelection = 'multiple';
         this.sideBar = {
             toolPanels: [
@@ -237,24 +167,40 @@ export class MarketviewComponent implements OnInit {
             ]
             // defaultToolPanel: 'filters'
         };
+        this.unsubscribeAll = new Subject();
     }
 
-    openSuccessSnackBar() {
-        this._snackBar.openFromComponent(PizzaPartyComponent, {
+    ngOnInit(): void {
+        // Subscribe to config changes
+        this.fuseConfigService.config
+            .pipe(takeUntil(this.unsubscribeAll))
+            .subscribe(config => {
+                this.fuseConfig = config;
+            });
+    }
+
+    ngOnDestroy(): void {
+        // Unsubscribe from all subscriptions
+        this.unsubscribeAll.next();
+        this.unsubscribeAll.complete();
+    }
+
+    openSuccessSnackBar(): void {
+        this._snackBar.openFromComponent(SnackbarExampleComponent, {
             panelClass: ['success-snackbar'],
             duration: 5 * 1000
         });
     }
 
-    openDialog() {
-        const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    openDialog(): void {
+        const dialogRef = this.dialog.open(SaveDialogComponent);
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
         });
     }
 
-    onGridReady(params) {
+    onGridReady(params): void {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
         // AUTO SIZE COLUMNS
@@ -265,8 +211,8 @@ export class MarketviewComponent implements OnInit {
         // this.gridColumnApi.autoSizeColumns(allColumnIds);
     }
 
-    getContextMenuItems(params) {
-        var result = [
+    getContextMenuItems(params): any[] {
+        const result = [
             {
                 name: 'Actions',
                 subMenu: [
@@ -274,36 +220,36 @@ export class MarketviewComponent implements OnInit {
                     'paste',
                     {
                         name: 'Clear',
-                        shortcut: 'Ctrl+B',
+                        shortcut: 'Ctrl+B'
                     },
                     {
                         name: 'Insert Single',
-                        shortcut: 'Ctrl+Shift+S',
+                        shortcut: 'Ctrl+Shift+S'
                     },
                     {
                         name: 'Insert Multiple',
-                        shortcut: 'Ctrl+Shift+L',
+                        shortcut: 'Ctrl+Shift+L'
                     },
                     {
                         name: 'Multi-Edit',
-                        shortcut: 'Ctrl+E',
+                        shortcut: 'Ctrl+E'
                     },
                     {
                         name: 'Multi-Filter',
-                        shortcut: 'Ctrl+F',
+                        shortcut: 'Ctrl+F'
                     },
                     {
                         name: 'Delete',
-                        shortcut: 'Ctrl+Q',
+                        shortcut: 'Ctrl+Q'
                     },
                     'separator',
                     {
                         name: 'Undo',
-                        shortcut: 'Ctrl+N',
+                        shortcut: 'Ctrl+N'
                     },
                     {
                         name: 'Redo',
-                        shortcut: 'Ctrl+R',
+                        shortcut: 'Ctrl+R'
                     }
                 ]
             },
@@ -323,585 +269,403 @@ export class MarketviewComponent implements OnInit {
             {
                 name: 'Fare Rule Text',
                 disabled: true,
-                tooltip:
-                    'Disabled Example'
+                tooltip: 'Disabled Example'
             },
             {
                 name: 'Travel Details',
                 disabled: true,
-                tooltip:
-                    'Disabled Example'
-            },
+                tooltip: 'Disabled Example'
+            }
         ];
         return result;
     }
 
-    ngOnInit() {}
-
     toggleSidebarOpen(key): void {
         this.fuseSidebarService.getSidebar(key).toggleOpen();
     }
-}
 
-function getFares() {
-    return [
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 5000,
-            qwAmt: 5000,
-            rtAmt: 10000,
-            fareClass: 'W1N0C9S1',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 6783,
-            qwAmt: 6783,
-            rtAmt: 13566,
-            fareClass: 'RNN0C9S3',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 299,
-            qwAmt: 299,
-            rtAmt: 598,
-            fareClass: 'YCA',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: 'IAD-LHR',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 400,
-            qwAmt: 400,
-            rtAmt: 800,
-            fareClass: 'YCA',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: 'IAD-LHR',
-            AP: '1',
-            minStay: '3',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 700,
-            qwAmt: 700,
-            rtAmt: 1400,
-            fareClass: 'VLW2T1M5',
-            FTC: 'ERU',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '3',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 5000,
-            qwAmt: 5000,
-            rtAmt: 10000,
-            fareClass: 'W1N0C9S1',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 6783,
-            qwAmt: 6783,
-            rtAmt: 13566,
-            fareClass: 'RNN0C9S3',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 299,
-            qwAmt: 299,
-            rtAmt: 598,
-            fareClass: 'YCA',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: 'IAD-LHR',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 400,
-            qwAmt: 400,
-            rtAmt: 800,
-            fareClass: 'YCA',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: 'IAD-LHR',
-            AP: '1',
-            minStay: '3',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 700,
-            qwAmt: 700,
-            rtAmt: 1400,
-            fareClass: 'VLW2T1M5',
-            FTC: 'ERU',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '3',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 5000,
-            qwAmt: 5000,
-            rtAmt: 10000,
-            fareClass: 'W1N0C9S1',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 6783,
-            qwAmt: 6783,
-            rtAmt: 13566,
-            fareClass: 'RNN0C9S3',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 299,
-            qwAmt: 299,
-            rtAmt: 598,
-            fareClass: 'YCA',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: 'IAD-LHR',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 400,
-            qwAmt: 400,
-            rtAmt: 800,
-            fareClass: 'YCA',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: 'IAD-LHR',
-            AP: '1',
-            minStay: '3',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 700,
-            qwAmt: 700,
-            rtAmt: 1400,
-            fareClass: 'VLW2T1M5',
-            FTC: 'ERU',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '3',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 5000,
-            qwAmt: 5000,
-            rtAmt: 10000,
-            fareClass: 'W1N0C9S1',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 6783,
-            qwAmt: 6783,
-            rtAmt: 13566,
-            fareClass: 'RNN0C9S3',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 299,
-            qwAmt: 299,
-            rtAmt: 598,
-            fareClass: 'YCA',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: 'IAD-LHR',
-            AP: '1',
-            minStay: '7|1|+',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 400,
-            qwAmt: 400,
-            rtAmt: 800,
-            fareClass: 'YCA',
-            FTC: 'XOX',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: 'IAD-LHR',
-            AP: '1',
-            minStay: '3',
-            maxStay: '3'
-        },
-        {
-            MRKT: 'WASLON',
-            CXR: 'AA',
-            ORIG: 'WAS',
-            DEST: 'LON',
-            OR: 2,
-            CUR: 'USD',
-            baseFareAmt: 700,
-            qwAmt: 700,
-            rtAmt: 1400,
-            fareClass: 'VLW2T1M5',
-            FTC: 'ERU',
-            yqyrAmt: 225,
-            yqyrRoutingOutbound: 'IAD-LHR',
-            yqyrRoutingInbound: '',
-            AP: '1',
-            minStay: '3',
-            maxStay: '3'
-        }
-    ];
-    
-}
-
-function countries() {
-    var countries = [
-        {
-            country: 'Ireland',
-            continent: 'Europe',
-            language: 'English'
-        },
-        {
-            country: 'Spain',
-            continent: 'Europe',
-            language: 'Spanish'
-        },
-        {
-            country: 'United Kingdom',
-            continent: 'Europe',
-            language: 'English'
-        },
-        {
-            country: 'France',
-            continent: 'Europe',
-            language: 'French'
-        },
-        {
-            country: 'Germany',
-            continent: 'Europe',
-            language: '(other)'
-        },
-        {
-            country: 'Sweden',
-            continent: 'Europe',
-            language: '(other)'
-        },
-        {
-            country: 'Norway',
-            continent: 'Europe',
-            language: '(other)'
-        },
-        {
-            country: 'Italy',
-            continent: 'Europe',
-            language: '(other)'
-        },
-        {
-            country: 'Greece',
-            continent: 'Europe',
-            language: '(other)'
-        },
-        {
-            country: 'Iceland',
-            continent: 'Europe',
-            language: '(other)'
-        },
-        {
-            country: 'Portugal',
-            continent: 'Europe',
-            language: 'Portuguese'
-        },
-        {
-            country: 'Malta',
-            continent: 'Europe',
-            language: '(other)'
-        },
-        {
-            country: 'Brazil',
-            continent: 'South America',
-            language: 'Portuguese'
-        },
-        {
-            country: 'Argentina',
-            continent: 'South America',
-            language: 'Spanish'
-        },
-        {
-            country: 'Colombia',
-            continent: 'South America',
-            language: 'Spanish'
-        },
-        {
-            country: 'Peru',
-            continent: 'South America',
-            language: 'Spanish'
-        },
-        {
-            country: 'Venezuela',
-            continent: 'South America',
-            language: 'Spanish'
-        },
-        {
-            country: 'Uruguay',
-            continent: 'South America',
-            language: 'Spanish'
-        }
-    ];
-    return countries;
-}
-var games = [
-    'Chess',
-    'Cross and Circle',
-    'Daldøs',
-    'Downfall',
-    'DVONN',
-    'Fanorona',
-    'Game of the Generals',
-    'Ghosts',
-    'Abalone',
-    'Agon',
-    'Backgammon',
-    'Battleship',
-    'Blockade',
-    'Blood Bowl',
-    'Bul',
-    'Camelot',
-    'Checkers',
-    'Go',
-    'Gipf',
-    'Guess Who?',
-    'Hare and Hounds',
-    'Hex',
-    'Hijara',
-    'Isola',
-    'Janggi (Korean Chess)',
-    'Le Jeu de la Guerre',
-    'Patolli',
-    'Plateau',
-    'PÜNCT',
-    'Rithmomachy',
-    'Sáhkku',
-    'Senet',
-    'Shogi',
-    'Space Hulk',
-    'Stratego',
-    'Sugoroku',
-    'Tâb',
-    'Tablut',
-    'Tantrix',
-    'Wari',
-    'Xiangqi (Chinese chess)',
-    'YINSH',
-    'ZÈRTZ',
-    'Kalah',
-    'Kamisado',
-    'Liu po',
-    'Lost Cities',
-    'Mad Gab',
-    'Master Mind',
-    'Nine Men\'s Morris',
-    'Obsession',
-    'Othello'
-];
-function createData() {
-    var rowCount = 20;
-    var row = 0;
-    var data = [];
-    for (var i = 0; i < rowCount; i++) {
-        var rowItem = createRowItem(row);
-        data.push(rowItem);
-        row++;
+    getFares(): any[] {
+        return [
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 5000,
+                qwAmt: 5000,
+                rtAmt: 10000,
+                fareClass: 'W1N0C9S1',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 6783,
+                qwAmt: 6783,
+                rtAmt: 13566,
+                fareClass: 'RNN0C9S3',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 299,
+                qwAmt: 299,
+                rtAmt: 598,
+                fareClass: 'YCA',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: 'IAD-LHR',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 400,
+                qwAmt: 400,
+                rtAmt: 800,
+                fareClass: 'YCA',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: 'IAD-LHR',
+                AP: '1',
+                minStay: '3',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 700,
+                qwAmt: 700,
+                rtAmt: 1400,
+                fareClass: 'VLW2T1M5',
+                FTC: 'ERU',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '3',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 5000,
+                qwAmt: 5000,
+                rtAmt: 10000,
+                fareClass: 'W1N0C9S1',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 6783,
+                qwAmt: 6783,
+                rtAmt: 13566,
+                fareClass: 'RNN0C9S3',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 299,
+                qwAmt: 299,
+                rtAmt: 598,
+                fareClass: 'YCA',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: 'IAD-LHR',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 400,
+                qwAmt: 400,
+                rtAmt: 800,
+                fareClass: 'YCA',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: 'IAD-LHR',
+                AP: '1',
+                minStay: '3',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 700,
+                qwAmt: 700,
+                rtAmt: 1400,
+                fareClass: 'VLW2T1M5',
+                FTC: 'ERU',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '3',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 5000,
+                qwAmt: 5000,
+                rtAmt: 10000,
+                fareClass: 'W1N0C9S1',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 6783,
+                qwAmt: 6783,
+                rtAmt: 13566,
+                fareClass: 'RNN0C9S3',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 299,
+                qwAmt: 299,
+                rtAmt: 598,
+                fareClass: 'YCA',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: 'IAD-LHR',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 400,
+                qwAmt: 400,
+                rtAmt: 800,
+                fareClass: 'YCA',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: 'IAD-LHR',
+                AP: '1',
+                minStay: '3',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 700,
+                qwAmt: 700,
+                rtAmt: 1400,
+                fareClass: 'VLW2T1M5',
+                FTC: 'ERU',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '3',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 5000,
+                qwAmt: 5000,
+                rtAmt: 10000,
+                fareClass: 'W1N0C9S1',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 6783,
+                qwAmt: 6783,
+                rtAmt: 13566,
+                fareClass: 'RNN0C9S3',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 299,
+                qwAmt: 299,
+                rtAmt: 598,
+                fareClass: 'YCA',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: 'IAD-LHR',
+                AP: '1',
+                minStay: '7|1|+',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 400,
+                qwAmt: 400,
+                rtAmt: 800,
+                fareClass: 'YCA',
+                FTC: 'XOX',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: 'IAD-LHR',
+                AP: '1',
+                minStay: '3',
+                maxStay: '3'
+            },
+            {
+                MRKT: 'WASLON',
+                CXR: 'AA',
+                ORIG: 'WAS',
+                DEST: 'LON',
+                OR: 2,
+                CUR: 'USD',
+                baseFareAmt: 700,
+                qwAmt: 700,
+                rtAmt: 1400,
+                fareClass: 'VLW2T1M5',
+                FTC: 'ERU',
+                yqyrAmt: 225,
+                yqyrRoutingOutbound: 'IAD-LHR',
+                yqyrRoutingInbound: '',
+                AP: '1',
+                minStay: '3',
+                maxStay: '3'
+            }
+        ];
     }
-    return data;
-}
-function createRowItem(row) {
-    var firstNames = ['Sophie', 'Isabelle', 'Emily', 'Olivia'];
-    var lastNames = ['Beckham', 'Black', 'Braxton', 'Brennan'];
-    var rowItem: any = {};
-    var countryData = countries()[row % countries().length];
-    rowItem.country = countryData.country;
-    rowItem.language = countryData.language;
-    var firstName = firstNames[row % firstNames.length];
-    var lastName = lastNames[row % lastNames.length];
-    rowItem.name = firstName + ' ' + lastName;
-    rowItem.game = {
-        name: games[Math.floor(((row * 13) / 17) * 19) % games.length]
-    };
-    // rowItem.gameName = 'toolTip: ' + rowItem.game.name.toUpperCase();
-    return rowItem;
 }
