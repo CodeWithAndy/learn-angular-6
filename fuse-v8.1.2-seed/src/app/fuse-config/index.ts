@@ -25,7 +25,8 @@ export const fuseConfig: FuseConfig = {
         },
         toolbar  : {
             customBackgroundColor: true,
-            background           : 'fuse-cyan-dark-500',
+            background           : 'fuse-navy-700',
+            // background           : 'fuse-cyan-dark-500',
             hidden               : false,
             position             : 'below-static'
         },
